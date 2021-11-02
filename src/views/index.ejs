@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="https://www.ssptaji.cz">
+                <img src="/img/logo.png" alt="ssptaji logo">
+            </a>
+        </div>
+    </header>
+    <main>
+        <div class="wrapper">
+            <article>
+                <h4>Typ:</h4>
+                <p>
+                    Zaškrtněte obory o které máte zájem. <strong>Formulář můžete odeslat jen jednou!</strong>
+                </p>
+            </article>
+            <form action="/" method="post">
+                <section class="udaje">
+                    <div class="box">
+                        <label for="">Jmeno:</label>
+                        <input type="text" name="Jmeno" id="Jmeno" class="text">
+                    </div>
+                    <div class="box">
+                        <label for="">Přijmení:</label>
+                        <input type="text" name="Prijmeni" id="Prijmeni" class="text">
+                    </div>
+                    <div class="box">
+                        <label for="">Email:</label>
+                        <input type="email" name="Email" id="Email" class="text">
+                    </div>
+                </section>
+                <section class="obory">
+                    <section class="elektro">
+                        <div class="checkboxes">
+                            <input type="checkbox" name="Mechanik elektrtechnik" id="Mechanik elektrtechnik">
+                            <label for="">Mechanik elektrtechnik</label>
+                        </div>
+                        <div class="checkboxes">
+                            <input type="checkbox" name="Elektrikář" id="Elektrikář">
+                            <label for="">Elektrikář</label>
+                        </div>
+                        <div class="checkboxes">
+                            <input type="checkbox" name="Elektrikář silnoproud" id="Elektrikář silnoproud">
+                            <label for="">Elektrikář silnoproud</label>
+                        </div>
+                    </section>
+                    <section class="strojirenství">
+                        <div class="checkboxes">
+                            <input type="checkbox" name="Mechanik seřizovač" id="Mechanik seřizovač">
+                            <label for="">Mechanik seřizovač</label>
+                        </div>
+                        <div class="checkboxes">
+                            <input type="checkbox" name="Nástrojař" id="Nástrojař">
+                            <label for="">Nástrojař</label>
+                        </div>
+                        <div class="checkboxes">
+                            <input type="checkbox" name="Obraběč kovů" id="Obraběč kovů">
+                            <label for="">Obraběč kovů</label>
+                        </div>
+                        <div class="checkboxes">
+                            <input type="checkbox" name="Strojní Mechanik" id="Strojní Mechanik">
+                            <label for="">Strojní Mechanik</label>
+                        </div>
+                    </section>
+                </section>
+                <button type="submit">Odeslat</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div class="kontakt">
+            <h4>Pracoviště polenská</h4>
+            <p>Polenská 2, 586 01 Jihlava</p>
+            <p>+420 567 584 306</p>
+            <p>wackova@ssptaji.cz</p>
+        </div>
+    </footer>
+</body>
+</html>
