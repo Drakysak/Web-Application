@@ -6,10 +6,10 @@ const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: false}))
 
-app.use(express.static("public"));
-app.use("/css", express.static(__dirname + "public/css"));
-app.use("/js", express.static(__dirname + "public/js"));
-app.use("/img", express.static(__dirname + "public/img"));
+app.use(express.static("Public"));
+app.use("/css", express.static(__dirname + "Public/css"));
+app.use("/js", express.static(__dirname + "Public/js"));
+app.use("/img", express.static(__dirname + "Public/img"));
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
