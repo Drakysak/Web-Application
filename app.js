@@ -1,3 +1,4 @@
+const { render } = require("ejs");
 const express = require("express");
 const xlsx = require("xlsx");
 
@@ -44,6 +45,10 @@ app.post("/", (req, res) => {
         
                 res.redirect(req.url);
         }       
+});
+
+app.get("/database", (req,res) => {
+        res.render("data");
 });
 
 app.listen(port);
