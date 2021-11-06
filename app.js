@@ -34,8 +34,9 @@ app.post("/", (req, res) => {
         console.log(emailStore);
 
         const condition = emailStore.includes(req.body.Email);
+        console.log(condition);
 
-        if(condition || (req.body.Jmeno == "" || req.body.Prijemni == "")){
+        if(condition || req.body.Jmeno == "" || req.body.Prijemni == "" || req.body.Emial == ""){
                 console.log("něco je zle");
                 res.redirect(req.url);
         }else{
