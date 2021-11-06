@@ -11,11 +11,12 @@ app.use(express.static("Public"));
 app.use("/css", express.static(__dirname + "Public/css"));
 app.use("/js", express.static(__dirname + "Public/js"));
 app.use("/img", express.static(__dirname + "Public/img"));
+app.use("/data", express.static(__dirname + "Public/data"));
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
-var wb = xlsx.readFile("./data/Data.xlsx");
+var wb = xlsx.readFile("./Public/data/Data.xlsx");
 var ws = wb.Sheets["List1"];
 var data = xlsx.utils.sheet_to_json(ws);
 
@@ -41,7 +42,7 @@ app.post("/", (req, res) => {
                 data.push(req.body);
 
                 xlsx.utils.sheet_add_json(ws, data);
-                xlsx.writeFile(wb, "./data/Data.xlsx");
+                xlsx.writeFile(wb, "./Public/data/Data.xlsx");
         
                 res.redirect(req.url);
         }       
