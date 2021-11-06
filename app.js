@@ -48,11 +48,10 @@ app.post("/", (req, res) => {
 });
 
 app.get("/database", (req,res) => {
-        const tables = xlsx.utils.sheet_to_html(ws).toString();
-        /*res.render("data", {
-                constTables : tables
-        });*/
-        res.send(tables);
+        const tables = xlsx.utils.sheet_to_html(ws);
+        res.render("data", {
+                dataTables : tables
+        });
 });
 
 app.listen(port);
