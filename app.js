@@ -39,7 +39,8 @@ app.post("/", async(req, res) => {
 
                 const emials = await client.query("SELECT usersdata.email FROM usersdata");
                 console.log("conected");
-                console.log(emials)
+                console.log(JSON.stringify(emials));
+
         }catch(err){
 
                 console.log(err)
