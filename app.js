@@ -40,6 +40,7 @@ app.post("/", async(req, res) => {
                 const emials = await client.query("SELECT usersdata.email FROM usersdata");
                 console.log("conected");
                 console.log(emials)
+                res.redirect(req.url);
 
 
         }catch(err){
