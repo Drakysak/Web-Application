@@ -48,6 +48,7 @@ app.post("/", async(req, res) => {
 
                 await client.end();
                 console.log("client was endet");
+                res.redirect(req.url);
         }
 
         /*const emailStore = data.map((item) => {
