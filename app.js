@@ -1,14 +1,14 @@
 const { render } = require("ejs");
-const pg = require("pg");
+const { Client } = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
 
-/*const client = new Client({
+const client = new Client({
         connectionString: process.env.DATABASE_URL,
         ssl: {
                 rejectUnauthorized: false
         }
-});*/
+});
 
 const conString = process.env.DATABASE_URL
 
@@ -36,35 +36,8 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", async(req, res) => {
-        try{
-                pg.connect(conString, function(err, client, done) {
-                        if(err) {
-                          return console.error('error fetching client from pool', err);
-                        }
-                        client.query("SELECT * FROM usersdata", function(err, result) {
-                          //call `done()` to release the client back to the pool
-                          done();
-                      
-                          if(err) {
-                            return console.error('error running query', err);
-                          }
-                          console.log(result.rows);
-                          //output: 1
-                        });
-                      });        
-        
 
-        }catch(err){
-
-                console.log(err)
-
-        }finally{
-
-                await client.end();
-                console.log("client was endet");
-        }
-
-        /*const emailStore = data.map((item) => {
+        const emailStore = data.map((item) => {
                 return item.Email
         });
 
@@ -83,7 +56,7 @@ app.post("/", async(req, res) => {
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
         
                 res.redirect(req.url);
-        }*/   
+        }   
 });
 
 app.get("/database", (req,res) => {
