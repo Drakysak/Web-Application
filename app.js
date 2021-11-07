@@ -1,5 +1,5 @@
 const { render } = require("ejs");
-const { Client } = require("pg");
+const pg = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
 
@@ -9,6 +9,8 @@ const xlsx = require("xlsx");
                 rejectUnauthorized: false
         }
 });*/
+
+const conString = process.env.DATABASE_URL
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -35,26 +37,22 @@ app.get("/", (req, res) => {
 
 app.post("/", async(req, res) => {
         try{
-                const client = new Client({
-                        connectionString: process.env.DATABASE_URL,
-                        ssl: {
-                                rejectUnauthorized: false
+                pg.connect(conString, function(err, client, done) {
+                        if(err) {
+                          return console.error('error fetching client from pool', err);
                         }
-                });
-                await client.connect(function(err, clien, done) {
-                        if(err){
-                                return console.error(err)
-                        }
-                        clien.query("SELECT * FROM usersdata", function(err, result){
-
-                                done();
-
-                                if(err){
-                                        return console.error(err);
-                                }
-                                console.log(result);
+                        client.query("SELECT * FROM usersdata", function(err, result) {
+                          //call `done()` to release the client back to the pool
+                          done();
+                      
+                          if(err) {
+                            return console.error('error running query', err);
+                          }
+                          console.log(result.rows);
+                          //output: 1
                         });
-                });
+                      });        
+        
 
         }catch(err){
 
