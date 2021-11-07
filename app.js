@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
         res.render("index");
 });
 
-app.post("/", async(req, res) => {
+app.post("/", (req, res) => {
 
         const emailStore = data.map((item) => {
                 return item.Email
