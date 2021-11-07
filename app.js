@@ -35,11 +35,20 @@ app.get("/", (req, res) => {
 
 app.post("/", async(req, res) => {
         try{
-                await client.connect();
+                await client.connect(function(err, clien, done) {
+                        if(err){
+                                return console.error(err)
+                        }
+                        clien.query("SELECT * FROM usersdata", function(err, result){
 
-                const emials = await client.query("SELECT * FROM usersdata");
-                console.log("conected");
-                console.log(emials)
+                                done();
+
+                                if(err){
+                                        return console.error(err);
+                                }
+                                console.log(result);
+                        });
+                });
 
         }catch(err){
 
