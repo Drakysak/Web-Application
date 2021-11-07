@@ -4,11 +4,6 @@ const express = require("express");
 const xlsx = require("xlsx");
 
 const client = new Client({
-        /*user: "huslqyfwnqeqod",
-        password: "e46c47f9a95d5c085796db7a2867b378d9469f618cfc0e35b6bbe78b882504d8",
-        host: "ec2-54-195-141-170.eu-west-1.compute.amazonaws.com",
-        port: 5432,
-        database: "d1jcghvppml60j"*/
         connectionString: process.env.DATABASE_URL,
         ssl: {
                 rejectUnauthorized: false
@@ -44,6 +39,7 @@ app.post("/", async(req, res) => {
 
                 const emials = await client.query("SELECT Email FROM usersdata");
                 console.log("conected");
+                console.log(emials)
 
 
         }catch(err){
