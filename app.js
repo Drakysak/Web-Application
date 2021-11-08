@@ -1,5 +1,5 @@
 const { render } = require("ejs");
-const { Client, Pool } = require("pg");
+const { Pool } = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
 
@@ -39,32 +39,20 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-        const query = 'SELECT * FROM usersdata';
         const client = await pool.connect();
-
         try{
-                const a = await client.query(query);
-
-                console.log(a.rows);
+                const query = await client.query("SELECT * FROM usersdata");
+                console.log(query.rows);
 
         }catch(err){
-                console.log(err);
-        }finally{
-                client.release();
-        }
 
-        /*pool.connect()
-        .then(async client => {
-          return client.query(query) // your query string here
-            .then(res => {
-              client.release()
-              console.log(res.rows) // your callback here
-            })
-            .catch(e => {
-              client.release()
-              console.log(err.stack) // your callback here
-            })
-        })*/
+                console.log(err);
+
+        }finally{
+
+                client.release();
+
+        }
 
         /*const emailStore = data.map((item) => {
                 return item.Email
