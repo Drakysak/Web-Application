@@ -40,8 +40,20 @@ app.get("/", (req, res) => {
 
 app.post("/", async (req, res) => {
         const query = 'SELECT * FROM usersdata';
+        const client = await pool.connect();
 
-        pool.connect()
+        try{
+                const a = await client.query(query);
+
+                console.log(a.rows);
+
+        }catch(err){
+                console.log(err);
+        }finally{
+                client.release();
+        }
+
+        /*pool.connect()
         .then(async client => {
           return client.query(query) // your query string here
             .then(res => {
@@ -52,7 +64,7 @@ app.post("/", async (req, res) => {
               client.release()
               console.log(err.stack) // your callback here
             })
-        })
+        })*/
 
         /*const emailStore = data.map((item) => {
                 return item.Email
