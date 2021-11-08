@@ -10,6 +10,8 @@ const client = new Client({
         }
 });
 
+await client.connect()
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -36,7 +38,6 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
         const query = 'SELECT * FROM usersdata';
 
-        await client.connect()
         const resd = await client.query(query)
         console.log(resd.rows)
         await client.end()
