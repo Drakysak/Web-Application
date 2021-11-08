@@ -51,6 +51,7 @@ app.post("/", async (req, res) => {
         }finally{
 
                 client.release();
+                res.redirect(req.url);
 
         }
 
