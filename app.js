@@ -37,7 +37,17 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
 
-        const emailStore = data.map((item) => {
+        try {
+                const res = await client.query("SELECT * FROM user");
+                console.log(res.rows);
+            } catch (err) {
+                console.log(err.stack);
+            } finally {
+                client.close();
+                console.log("client colosd")
+            }
+
+        /*const emailStore = data.map((item) => {
                 return item.Email
         });
 
@@ -56,7 +66,7 @@ app.post("/", (req, res) => {
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
         
                 res.redirect(req.url);
-        }   
+        }*/
 });
 
 app.get("/database", (req,res) => {
