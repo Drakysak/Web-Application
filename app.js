@@ -10,8 +10,6 @@ const client = new Client({
         }
 });
 
-const conString = process.env.DATABASE_URL
-
 const app = express();
 const port = process.env.PORT || 3000;
 
