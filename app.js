@@ -35,6 +35,11 @@ app.get("/", (req, res) => {
 
 app.post("/", async (req, res) => {
         const query = 'SELECT * FROM usersdata';
+
+        pool.on('error', (err, client) => {
+                console.error('Error:', err);
+        });
+
         try {
                 const client = await pool.connect();
                 const res = await client.query(query);
