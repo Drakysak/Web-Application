@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
         const query = 'SELECT * FROM usersdata';
 
-        await client.connect(() =>{
+         client.connect(async () =>{
                 const resd = await client.query(query)
                 console.log(resd.rows)
                 await client.end()
