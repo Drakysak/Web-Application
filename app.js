@@ -36,20 +36,10 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
         const query = 'SELECT * FROM usersdata';
 
-        pool.on('error', (err, client) => {
-                console.error('Error:', err);
-        });
-
-        try {
-                const client = await pool.connect();
-                const res = await client.query(query);
-        
-                for (let row of res.rows) {
-                    console.log(row);
-                }
-            } catch (err) {
-                console.error(err);
-            }
+        await client.connect()
+        const res = await client.query(query)
+        console.log(res.rows)
+        await client.end()
 
         /*const emailStore = data.map((item) => {
                 return item.Email
