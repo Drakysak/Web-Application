@@ -1,9 +1,9 @@
 const { render } = require("ejs");
-const { Client } = require("pg");
+const { Client, Pool } = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
 
-const client = new Client({
+const pool = new Pool({
         connectionString: process.env.DATABASE_URL,
         ssl: {
                 rejectUnauthorized: false
@@ -36,10 +36,10 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
         const query = 'SELECT * FROM usersdata';
 
-         client.connect(async () =>{
-                const resd = await client.query(query)
+        pool.connect(async () =>{
+                const resd = await pool.query(query)
                 console.log(resd.rows)
-                await client.end()
+                await pool.end()
         })
 
         /*const emailStore = data.map((item) => {
