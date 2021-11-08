@@ -42,7 +42,7 @@ app.post("/", async (req, res) => {
             } catch (err) {
                 console.log(err.stack);
             } finally {
-                client.close();
+                client.end();
                 console.log("client colosd")
             }
 
