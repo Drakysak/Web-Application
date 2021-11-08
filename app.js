@@ -1,9 +1,9 @@
 const { render } = require("ejs");
-const { Pool } = require("pg");
+const { Client } = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
 
-const pool = new Pool({
+const client = new Client({
         connectionString: process.env.DATABASE_URL,
         ssl: {
                 rejectUnauthorized: false
