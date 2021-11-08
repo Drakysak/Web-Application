@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
         res.render("index");
 });
 
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
 
         try {
                 const res = await client.query("SELECT * FROM user");
