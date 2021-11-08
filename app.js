@@ -36,6 +36,7 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
 
         try {
+                client.connect();
                 const res = await client.query("SELECT * FROM user");
                 console.log(res.rows);
             } catch (err) {
