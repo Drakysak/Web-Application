@@ -10,6 +10,11 @@ const pool = new Pool({
         }
 });
 
+pool.on('error', (err, client) => {
+        console.error('Unexpected error on idle client', err) // your callback here
+        process.exit(-1)
+})
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -36,10 +41,17 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
         const query = 'SELECT * FROM usersdata';
 
-        pool.connect(async () =>{
-                const resd = await pool.query(query)
-                console.log(resd.rows)
-                await pool.end()
+        pool.connect()
+        .then(async client => {
+          return client.query(query) // your query string here
+            .then(res => {
+              client.release()
+              console.log(res.rows) // your callback here
+            })
+            .catch(e => {
+              client.release()
+              console.log(err.stack) // your callback here
+            })
         })
 
         /*const emailStore = data.map((item) => {
