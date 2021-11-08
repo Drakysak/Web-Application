@@ -2,6 +2,7 @@ const { render } = require("ejs");
 const { Pool } = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
+const { ChainCondition } = require("express-validator/src/context-items");
 
 const pool = new Pool({
         connectionString: process.env.DATABASE_URL,
@@ -41,18 +42,20 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
         const client = await pool.connect();
         try{
-                const query = await client.query("SELECT * FROM usersdata");
-                console.log(query.rows);
+                const query = await client.query("SELECT Email FROM usersdata");
 
+                const condition = query.rows.includes(req.body.Emial);
+
+                if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Emial == ""){
+                        console.log("něco je špatně")
+                }else{
+                        console.log(query.rows);
+                }
         }catch(err){
-
                 console.log(err);
-
         }finally{
-
                 client.release();
                 res.redirect(req.url);
-
         }
 
         /*const emailStore = data.map((item) => {
