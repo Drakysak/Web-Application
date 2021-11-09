@@ -43,7 +43,12 @@ app.post("/", async (req, res) => {
         const client = await pool.connect();
         try{
                 const emailQuery = await client.query("SELECT email FROM usersdata");
-                console.log(emailQuery.rows)
+
+                const emails = emailQuery.rows.map((item) =>{
+                        return item
+                })
+
+                console.log(emails)
                 const condition = emailQuery.rows.includes(req.body.Email);
                 console.log(condition);
 
