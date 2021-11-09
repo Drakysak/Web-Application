@@ -48,7 +48,6 @@ app.post("/", async (req, res) => {
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
                         console.log("něco je špatně")
                 }else{
-                        console.log(query.rows);
                         await client.query("INSERT INTO usersdata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", [
                                 req.body.Jmeno,
                                 reg.body.Prijmeni,
