@@ -44,12 +44,7 @@ app.post("/", async (req, res) => {
         try{
                 const emailQuery = await client.query("SELECT email FROM usersdata");
 
-                const emails = emailQuery.rows.map((item) =>{
-                        return item
-                })
-
-                console.log(emails)
-                const condition = emailQuery.rows.includes(req.body.Email);
+                const condition = emailQuery.rows.email.includes(req.body.Email);
                 console.log(condition);
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
