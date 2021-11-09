@@ -48,7 +48,7 @@ app.post("/", async (req, res) => {
                         console.log("něco je špatně")
                 }else{
                         console.log(query.rows);
-                        client.query("INSERT INTO usersdata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", [
+                        await client.query("INSERT INTO usersdata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", [
                                 req.body.Jmeno,
                                 reg.body.Prijmeni,
                                 req.body.Email,
@@ -61,7 +61,7 @@ app.post("/", async (req, res) => {
                                 req.body.Strojni_mechanik
                         ]);
 
-                        client.query("INSERT INTO userquestions (email) VALUES($1)", [req.body.Email]);
+                        await client.query("INSERT INTO userquestions (email) VALUES($1)", [req.body.Email]);
 
                         const query = await client.query("SELECT * FROM usersdata");
 
