@@ -43,7 +43,9 @@ app.post("/", async (req, res) => {
         const client = await pool.connect();
         try{
                 const emailQuery = await client.query("SELECT email FROM usersdata");
+                console.log(emailQuery.rows)
                 const condition = emailQuery.rows.includes(req.body.Email);
+                console.log(condition);
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
                         console.log("něco je špatně")
