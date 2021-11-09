@@ -46,7 +46,7 @@ app.post("/", async (req, res) => {
 
                 const condition = query.rows.includes(req.body.Emial);
 
-                if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Emial == ""){
+                if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
                         console.log("něco je špatně")
                 }else{
                         console.log(query.rows);
