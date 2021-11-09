@@ -42,13 +42,29 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
         const client = await pool.connect();
         try{
-                const query = await client.query("SELECT Email FROM usersdata");
-
                 const condition = query.rows.includes(req.body.Emial);
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
                         console.log("něco je špatně")
                 }else{
+                        console.log(query.rows);
+                        client.query("INSERT INTO usersdata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", [
+                                req.body.Jmeno,
+                                reg.body.Prijmeni,
+                                req.body.Email,
+                                req.body.Mechanik_elektrtechnik,
+                                req.body.Elektrikar,
+                                req.body.Elektrikar_silnoproud,
+                                req.body.Mechanik_serizovac,
+                                req.body.Nastrojar,
+                                req.body.Obrabec_kovu,
+                                req.body.Strojni_mechanik
+                        ]);
+
+                        client.query("INSERT INTO userquestions (email) VALUES($1)", [req.body.Email]);
+
+                        const query = await client.query("SELECT * FROM usersdata");
+
                         console.log(query.rows);
                 }
         }catch(err){
