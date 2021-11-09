@@ -42,7 +42,8 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
         const client = await pool.connect();
         try{
-                const condition = query.rows.includes(req.body.Emial);
+                const emailQuery = await client.query("SELECT email FROM usersdata");
+                const condition = emailQuery.rows.includes(req.body.Emial);
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
                         console.log("něco je špatně")
@@ -61,11 +62,11 @@ app.post("/", async (req, res) => {
                                 req.body.Strojni_mechanik
                         ]);
 
-                        await client.query("INSERT INTO userquestions (email) VALUES($1)", [req.body.Email]);
+                        await client.query("INSERT INTO userquestions(email) VALUES($1)", [req.body.Email]);
 
                         const query = await client.query("SELECT * FROM usersdata");
 
-                        console.log(query.rows);
+                        console.log(querys.rows);
                 }
         }catch(err){
                 console.log(err);
