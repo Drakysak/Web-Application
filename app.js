@@ -66,7 +66,7 @@ app.post("/", async (req, res) => {
 
                         const query = await client.query("SELECT * FROM usersdata");
 
-                        console.log(querys.rows);
+                        console.log(query.rows);
                 }
         }catch(err){
                 console.log(err);
