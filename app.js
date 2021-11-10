@@ -45,8 +45,6 @@ app.post("/", async (req, res) => {
                 const emailQuery = await client.query("SELECT email FROM usersdata");
 
                 const condition = JSON.stringify(emailQuery.rows).includes(req.body.Email);
-                
-                console.log(condition);
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
                         console.log("něco je špatně")
@@ -70,33 +68,13 @@ app.post("/", async (req, res) => {
 
                         console.log(query.rows);
                 }
+                
         }catch(err){
                 console.log(err);
         }finally{
                 client.release();
                 res.redirect(req.url);
         }
-
-        /*const emailStore = data.map((item) => {
-                return item.Email
-        });
-
-        console.log(emailStore);
-
-        const condition = emailStore.includes(req.body.Email);
-        console.log(condition);
-
-        if(condition || req.body.Jmeno == "" || req.body.Prijemni == "" || req.body.Emial == ""){
-                console.log("něco je zle");
-                res.redirect(req.url);
-        }else{
-                data.push(req.body);
-
-                xlsx.utils.sheet_add_json(ws, data);
-                xlsx.writeFile(wb, "./Public/data/Data.xlsx");
-        
-                res.redirect(req.url);
-        }*/
 });
 
 app.get("/database", (req,res) => {
