@@ -41,9 +41,9 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
         const client = await pool.connect();
         try{
-                const emailQuery = JSON.stringify( await client.query("SELECT email FROM usersdata"));
+                const emailQuery = await client.query("SELECT email FROM usersdata");
 
-                console.log(emailQuery);
+                console.log(JSON.stringify(emailQuery.rows));
 
                 const condition = emailQuery.rows.includes(req.body.Email);
                 
