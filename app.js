@@ -43,7 +43,7 @@ app.post("/", async (req, res) => {
         try{
                 const emailQuery = await client.query("SELECT email FROM usersdata");
 
-                console.log(JSON.stringify(emailQuery.rows));
+                console.log(emailQuery.rows);
 
                 const condition = emailQuery.rows.includes(req.body.Email);
                 
