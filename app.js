@@ -2,6 +2,7 @@ const { render } = require("ejs");
 const { Pool } = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
+const { json } = require("body-parser");
 
 const pool = new Pool({
         connectionString: process.env.DATABASE_URL,
@@ -43,11 +44,9 @@ app.post("/", async (req, res) => {
         try{
                 const emailQuery = await client.query("SELECT email FROM usersdata");
 
-                console.log(emailQuery.rows);
-
-                const condition = emailQuery.rows.includes(req.body.Email);
+                const condition = JSON.stringify(emailQuery.rows).includes(req.body.Email);
                 
-                console.log(req.body.Email);
+                console.log(condition);
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
                         console.log("něco je špatně")
