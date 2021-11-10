@@ -2,7 +2,6 @@ const { render } = require("ejs");
 const { Pool } = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
-const { ChainCondition } = require("express-validator/src/context-items");
 
 const pool = new Pool({
         connectionString: process.env.DATABASE_URL,
@@ -44,8 +43,9 @@ app.post("/", async (req, res) => {
         try{
                 const emailQuery = await client.query("SELECT email FROM usersdata");
 
-                const condition = emailQuery.rows.email.includes(req.body.Email);
-                console.log(condition);
+                const condition = emailQuery.rows.includes(req.body.Email);
+                
+                console.log(req.body.Email);
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
                         console.log("něco je špatně")
