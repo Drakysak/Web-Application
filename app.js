@@ -77,11 +77,30 @@ app.post("/", async (req, res) => {
         }
 });
 
-app.get("/database", (req,res) => {
-        const tables = xlsx.utils.sheet_to_html(ws);
+app.get("/database", async (req,res) => {
+        try{
+                const client = await pool.connect();
+
+                const dataQuery = await client.query("SELECT * FROM usersdata");
+
+                const table = xlsx.utils.sheet_to_html(dataQuery.rows);
+
+                res.render("data", {
+                        dataTable : table
+                });
+
+        }catch(err){
+
+                console.log(err);
+
+        }finally{
+                client.release();
+                console.log("conection end");
+        }
+        /*const tables = xlsx.utils.sheet_to_html(ws);
         res.render("data", {
                 dataTables : tables
-        });
+        });*/
 });
 
 app.listen(port);
