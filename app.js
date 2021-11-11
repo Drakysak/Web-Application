@@ -82,7 +82,7 @@ app.get("/database", async (req,res) => {
         try{
                 const dataQuery = JSON.stringify( await client.query("SELECT * FROM usersdata"));
 
-                var wb = xlsx.readFile("./Public/data/data.xlsx");
+                var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
                 var data = xlsx.utils.sheet_to_json(ws);
 
