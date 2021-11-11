@@ -82,7 +82,7 @@ app.get("/database", async (req,res) => {
         try{
                 const dataQuery = JSON.stringify( await client.query("SELECT * FROM usersdata"));
 
-                const table = xlsx.utils.sheet_to_html(dataQuery.rows);
+                const table = xlsx.utils.sheet_to_html(dataQuery);
 
                 res.render("data", {
                         dataTable : table
