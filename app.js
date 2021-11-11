@@ -92,6 +92,8 @@ app.get("/database", async (req,res) => {
                 
                 ws = wb.Sheets["List1"];
 
+                console.log(ws);
+
                 const table = xlsx.utils.sheet_to_html(ws);
                 res.render("data", {
                         dataTable : table
