@@ -84,6 +84,8 @@ app.get("/database", async (req,res) => {
 
                 const table = xlsx.utils.sheet_to_html(dataQuery);
 
+                console.log(table);
+
                 res.render("data", {
                         dataTable : table
                 });
