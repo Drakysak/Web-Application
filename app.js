@@ -82,10 +82,15 @@ app.get("/database", async (req,res) => {
         try{
                 const dataQuery = JSON.stringify( await client.query("SELECT * FROM usersdata"));
 
-                const table = xlsx.utils.sheet_to_html(dataQuery);
+                var wb = xlsx.readFile("./Public/data/data.xlsx");
+                var ws = wb.Sheets["List1"];
+                var data = xlsx.utils.sheet_to_json(ws);
 
-                console.log(table);
+                data.push(dataQuery);
+                xlsx.utils.sheet_add_json(ws, data);
+                xlsx.writeFile(wb, "./Public/data/Data.xlsx");
 
+                const table = xlsx.utils.sheet_to_html(ws);
                 res.render("data", {
                         dataTable : table
                 });
@@ -95,8 +100,10 @@ app.get("/database", async (req,res) => {
                 console.log(err);
 
         }finally{
+
                 client.release();
                 console.log("conection end");
+
         }
         /*const tables = xlsx.utils.sheet_to_html(ws);
         res.render("data", {
