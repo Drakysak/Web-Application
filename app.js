@@ -101,7 +101,7 @@ app.get("/database", async (req,res) => {
                         var condition = email.includes(emailQuery.rows[i]);
 
                         var condition = data.some((dat) => {
-                                if(dat.emial == emailQuery.rows[i]){
+                                if(dat.email == emailQuery.rows[i]){
                                         return true;
                                 }
                         })
