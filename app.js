@@ -91,9 +91,11 @@ app.get("/database", async (req,res) => {
                 var emial = data.map((item) =>{
                         return item.emial;
                 });
+
+                const emialQuery = await client.query("SELECT email FROM usersdata");
                 
                 for(var i = 0; i < dataQuery.rows.length; i++){
-                        if(emial.includes(data.rows.email[i])){
+                        if(emial.includes(emialQuery.rows[i])){
                                 return
                         }else{
                                 data.push(dataQuery.rows[i]);                                
