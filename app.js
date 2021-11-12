@@ -100,8 +100,9 @@ app.get("/database", async (req,res) => {
                         var condition = email.includes(emailQuery.rows[i]);
 
                         console.log(condition);
+                        console.log(emailQuery.rows[i]);
 
-                        if(email == emailQuery.rows[i]){
+                        if(condition){
                                 console.log("v souboru se už nachází");
                         }else{
                                 data.push(dataQuery.rows[i]);                                
