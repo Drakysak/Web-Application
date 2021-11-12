@@ -82,7 +82,7 @@ app.get("/database", async (req,res) => {
         try{
                 var dataQuery = await client.query("SELECT * FROM usersdata");
 
-                dataQuery = xlsx.utils.sheet_to_json(dataQuery.rows)
+                dataQuery = xlsx.utils.sheet_to_json(dataQuery.fields)
                 console.log(dataQuery)
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
@@ -93,7 +93,7 @@ app.get("/database", async (req,res) => {
                 data.push(dataQuery);
                 xlsx.utils.sheet_add_json(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
-                
+
                 console.log(ws);
                 const table = xlsx.utils.sheet_to_html(ws);
                 res.render("data", {
