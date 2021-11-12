@@ -73,6 +73,7 @@ app.post("/", async (req, res) => {
                 console.log(err);
         }finally{
                 client.release();
+                console.log(req.body)
                 res.redirect(req.url);
         }
 });
