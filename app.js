@@ -80,7 +80,7 @@ app.post("/", async (req, res) => {
 app.get("/database", async (req,res) => {
         const client = await pool.connect();
         try{
-                const dataQuery = JSON.stringify( await client.query("SELECT * FROM usersdata"));
+                const dataQuery = await client.query("SELECT * FROM usersdata");
                 console.log(dataQuery)
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
@@ -88,7 +88,7 @@ app.get("/database", async (req,res) => {
                 var data = xlsx.utils.sheet_to_json(ws);
                 console.log(data)
 
-                data.push(dataQuery);
+                data.push(dataQuery.rows);
                 xlsx.utils.sheet_add_json(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
                 
