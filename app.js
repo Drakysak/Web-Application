@@ -97,8 +97,8 @@ app.get("/database", async (req,res) => {
                 console.log(email);
 
                 for(var i = 0; i < dataQuery.rows.length; i++){
-                        if(email.includes(emailQuery.rows[i])){
-                                return
+                        if(email.includes(JSON.stringify(emailQuery.rows[i]))){
+                                console.log("v souboru se už nachází");
                         }else{
                                 data.push(dataQuery.rows[i]);                                
                         }
