@@ -98,10 +98,9 @@ app.get("/database", async (req,res) => {
                 console.log(email);
 
                 for(var i = 0; i < dataQuery.rows.length; i++){
-                        var condition = email.includes(emailQuery.rows[i]);
+                        var condition = JSON.stringify(email).includes(emailQuery.rows[i]);
 
                         console.log(condition);
-                        console.log(emailQuery.rows[i]);
 
                         if(condition){
                                 console.log("v souboru se už nachází");
@@ -124,7 +123,7 @@ app.get("/database", async (req,res) => {
                 console.log(err);
 
         }finally{
-                email = []
+
                 client.release();
                 console.log("conection end");
 
