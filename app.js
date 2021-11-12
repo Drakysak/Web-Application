@@ -93,7 +93,7 @@ app.get("/database", async (req,res) => {
                 }
 
                 console.log(data)
-                xlsx.utils.sheet_add_aoa(ws, data);
+                xlsx.utils.sheet_add_json(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
 
                 console.log(ws);
