@@ -88,7 +88,7 @@ app.get("/database", async (req,res) => {
                 var data = xlsx.utils.sheet_to_json(ws);
 
                 var email = data.map((item) =>{
-                        
+
                         return item.email;
                 });
 
@@ -124,7 +124,7 @@ app.get("/database", async (req,res) => {
                 console.log(err);
 
         }finally{
-
+                email = []
                 client.release();
                 console.log("conection end");
 
