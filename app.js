@@ -81,18 +81,18 @@ app.get("/database", async (req,res) => {
         const client = await pool.connect();
         try{
                 const dataQuery = JSON.stringify( await client.query("SELECT * FROM usersdata"));
+                console.log(dataQuery)
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
                 var data = xlsx.utils.sheet_to_json(ws);
+                console.log(data)
 
                 data.push(dataQuery);
                 xlsx.utils.sheet_add_json(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
                 
                 ws = wb.Sheets["List1"];
-
-                console.log(ws);
 
                 const table = xlsx.utils.sheet_to_html(ws);
                 res.render("data", {
