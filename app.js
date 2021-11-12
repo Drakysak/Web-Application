@@ -98,11 +98,11 @@ app.get("/database", async (req,res) => {
                 console.log(email);
 
                 for(var i = 0; i < dataQuery.rows.length; i++){
-                        var condition = email.includes(emailQuery.rows[i]);
+                        var condition = email.includes(JSON.stringify(emailQuery.rows[i]));
 
                         var condition = data.some((dat) => {
                                 console.log(dat.email);
-                                if(dat.email === emailQuery.rows[i]){
+                                if(dat.email == emailQuery.rows[i]){
                                         return true;
                                 }
                         })
