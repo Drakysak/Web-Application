@@ -87,9 +87,17 @@ app.get("/database", async (req,res) => {
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
                 var data = xlsx.utils.sheet_to_json(ws);
+
+                var emial = data.map((item) =>{
+                        return item.emial;
+                });
                 
                 for(var i = 0; i < dataQuery.rows.length; i++){
-                        data.push(dataQuery.rows[i]);
+                        if(emial.includes(data.rows[i].emial)){
+                                return
+                        }else{
+                                data.push(dataQuery.rows[i]);                                
+                        }
                 }
 
                 console.log(data)
