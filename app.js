@@ -88,7 +88,7 @@ app.get("/database", async (req,res) => {
                 var data = xlsx.utils.sheet_to_json(ws);
 
                 var email = data.map((item) =>{
-                        return item.emial;
+                        return item.email;
                 });
 
                 const emailQuery = await client.query("SELECT email FROM usersdata");
@@ -107,7 +107,7 @@ app.get("/database", async (req,res) => {
                 console.log(data)
                 xlsx.utils.sheet_add_json(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
-                
+
                 const table = xlsx.utils.sheet_to_html(ws);
                 res.render("data", {
                         dataTable : table
