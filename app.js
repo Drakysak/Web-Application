@@ -88,11 +88,8 @@ app.get("/database", async (req,res) => {
                 var data = xlsx.utils.sheet_to_json(ws);
 
                 var email = data.map((item) =>{
-                        if(email.includes(item.email)){
-                                console.log("emial už existuje");
-                        }else{
-                                return item.email;
-                        }
+                        
+                        return item.email;
                 });
 
                 const emailQuery = await client.query("SELECT email FROM usersdata");
