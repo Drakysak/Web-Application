@@ -82,15 +82,13 @@ app.get("/database", async (req,res) => {
         try{
                 var dataQuery = await client.query("SELECT * FROM usersdata");
                 console.log(dataQuery.rows)
-                var dataQuerry = xlsx.utils.sheet_to_json(dataQuery.rows)
-                console.log(dataQuerry)
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
                 var data = xlsx.utils.sheet_to_json(ws);
                 console.log(data)
 
-                data.push(dataQuerry);
+                data.push(dataQuery.rows);
                 xlsx.utils.sheet_add_json(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
 
