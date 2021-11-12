@@ -93,7 +93,7 @@ app.get("/database", async (req,res) => {
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
                 
                 ws = wb.Sheets["List1"];
-
+                console.log(ws);
                 const table = xlsx.utils.sheet_to_html(ws);
                 res.render("data", {
                         dataTable : table
