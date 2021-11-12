@@ -90,7 +90,7 @@ app.get("/database", async (req,res) => {
 
                 data.push(dataQuery.rows);
                 console.log(data)
-                xlsx.utils.sheet_add_dom(ws, data);
+                xlsx.utils.sheet_add_aoa(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
 
                 console.log(ws);
