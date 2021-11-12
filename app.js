@@ -86,9 +86,10 @@ app.get("/database", async (req,res) => {
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
                 var data = xlsx.utils.sheet_to_json(ws);
+                
+                
+                data.push(dataQuery.rows);
                 console.log(data)
-
-                data.push(JSON.parse(dataQuery.rows));
                 xlsx.utils.sheet_add_json(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
 
