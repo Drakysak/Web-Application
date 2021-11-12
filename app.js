@@ -82,20 +82,22 @@ app.get("/database", async (req,res) => {
         const client = await pool.connect();
         try{
                 var dataQuery = await client.query("SELECT * FROM usersdata");
-                console.log(dataQuery.rows)
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
                 var data = xlsx.utils.sheet_to_json(ws);
 
-                var emial = data.map((item) =>{
+                var email = data.map((item) =>{
                         return item.emial;
                 });
 
-                const emialQuery = await client.query("SELECT email FROM usersdata");
-                
+                const emailQuery = await client.query("SELECT email FROM usersdata");
+
+                console.log(emailQuery.rows);
+                console.log(email);
+
                 for(var i = 0; i < dataQuery.rows.length; i++){
-                        if(emial.includes(emialQuery.rows[i])){
+                        if(email.includes(emailQuery.rows[i])){
                                 return
                         }else{
                                 data.push(dataQuery.rows[i]);                                
@@ -105,8 +107,7 @@ app.get("/database", async (req,res) => {
                 console.log(data)
                 xlsx.utils.sheet_add_json(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
-
-                console.log(ws);
+                
                 const table = xlsx.utils.sheet_to_html(ws);
                 res.render("data", {
                         dataTable : table
