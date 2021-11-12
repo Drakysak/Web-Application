@@ -88,7 +88,7 @@ app.get("/database", async (req,res) => {
                 var data = xlsx.utils.sheet_to_json(ws);
                 
 
-                data.push(dataQuery.rows);
+                /*data.push(dataQuery.rows);*/
                 console.log(data)
                 xlsx.utils.sheet_add_aoa(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
