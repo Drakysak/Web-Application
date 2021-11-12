@@ -93,7 +93,7 @@ app.get("/database", async (req,res) => {
                 });
                 
                 for(var i = 0; i < dataQuery.rows.length; i++){
-                        if(emial.includes(data.rows[i].email)){
+                        if(emial.includes(data.rows.email[i])){
                                 return
                         }else{
                                 data.push(dataQuery.rows[i]);                                
