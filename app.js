@@ -85,6 +85,7 @@ app.get("/database", async (req,res) => {
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
+                console.log(ws);
                 var data = xlsx.utils.sheet_to_json(ws);
 
                 var email = data.map((item) =>{
@@ -98,16 +99,7 @@ app.get("/database", async (req,res) => {
                 console.log(email);
 
                 for(var i = 0; i < dataQuery.rows.length; i++){
-                        var condition = email.includes(JSON.stringify(emailQuery.rows[i]));
-
-                        var condition = data.some((dat) => {
-                                console.log(dat.email);
-                                if(dat.email == emailQuery.rows[i]){
-                                        return true;
-                                }
-                        })
-
-                        console.log(condition);
+                        /*var condition = email.includes(emailQuery.rows[i]);*/
 
                         if(condition){
                                 console.log("v souboru se už nachází");
