@@ -85,6 +85,7 @@ app.get("/database", async (req,res) => {
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
+                console.log(ws);
                 /*ws = {
                         '!ref': 'A1:J2',
                            '!margins': {
