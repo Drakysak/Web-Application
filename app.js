@@ -85,8 +85,16 @@ app.get("/database", async (req,res) => {
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
-                /*ws = {
+                ws = {
                         '!ref': 'A1:J2',
+                           '!margins': {
+                                left: 0.7,
+                                right: 0.7,
+                                top: 0.75,
+                                bottom: 0.75,
+                                header: 0.511811023622047,
+                                footer: 0.511811023622047
+                        },
                         A1: {
                                 t: 's',
                                 v: 'jmeno',
@@ -157,16 +165,8 @@ app.get("/database", async (req,res) => {
                                 r:'<t xml:space="preserve">strojní_mechanik</t>',
                                 h: 'strojní_mechanik',
                                 w: 'strojní_mechanik'
-                        },
-                        '!margins': {
-                                left: 0.7,
-                                right: 0.7,
-                                top: 0.75,
-                                bottom: 0.75,
-                                header: 0.511811023622047,
-                                footer: 0.511811023622047
                         }
-                }*/
+                }
                 var data = xlsx.utils.sheet_to_json(ws);
 
                 var email = data.map((item) =>{
