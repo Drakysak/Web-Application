@@ -85,7 +85,88 @@ app.get("/database", async (req,res) => {
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
-                console.log(ws);
+                ws = {
+                        '!ref': 'A1:J2',
+                        A1: {
+                                t: 's',
+                                v: 'jmeno',
+                                r: '<t xml:space="preserve">jmeno</t>',
+                                h: 'jmeno',
+                                w: 'jmeno'
+                        },
+                        B1: {
+                                t: 's',
+                                v: 'prijmeni',
+                                r: '<t xml:space="preserve">prijmeni</t>',
+                                h: 'prijmeni',
+                                w: 'prijmeni'
+                        },
+                        C1: {
+                                t: 's',
+                                v: 'email',
+                                r: '<t xml:space="preserve">email</t>',
+                                h: 'email',
+                                w: 'email'
+                        },
+                        D1: {
+                                t: 's',
+                                v: 'mechnaik_emektrotechnik',
+                                r: '<t xml:space="preserve">mechnaik_emektrotechnik</t>',
+                                h: 'mechnaik_emektrotechnik',
+                                w: 'mechnaik_emektrotechnik'
+                        },
+                        E1: {
+                                t: 's',
+                                v: 'elektrikář',
+                                r: '<t xml:space="preserve">elektrikář</t>',
+                                h: 'elektrikář',
+                                w: 'elektrikář'
+                        },
+                        F1: {
+                                t: 's',
+                                v: 'elektrikář_silnoproud',
+                                r: '<t xml:space="preserve">elektrikář_silnoproud</t>',
+                                h: 'elektrikář_silnoproud',
+                                w: 'elektrikář_silnoproud'
+                        },
+                        G1: {
+                                t: 's',
+                                v: 'mechanik_seřizovač',
+                                r: '<t xml:space="preserve">mechanik_seřizovač</t>',
+                                h: 'mechanik_seřizovač',
+                                w: 'mechanik_seřizovač'
+                        },
+                        H1: {
+                                t: 's',
+                                v: 'nastrojař',
+                                r: '<t xml:space="preserve">nastrojař</t>',
+                                h: 'nastrojař',
+                                w: 'nastrojař'
+                        },
+                        I1:{
+                                t: 's',
+                                v: 'obraběč_kovů',
+                                r: '<t xml:space="preserve">obraběč_kovů</t>',
+                                h: 'obraběč_kovů',
+                                w: 'obraběč_kovů'
+                                                          
+                        },
+                        J1: {
+                                t: 's',
+                                v: 'strojní_mechanik',
+                                r:'<t xml:space="preserve">strojní_mechanik</t>',
+                                h: 'strojní_mechanik',
+                                w: 'strojní_mechanik'
+                        },
+                        '!margins': {
+                                left: 0.7,
+                                right: 0.7,
+                                top: 0.75,
+                                bottom: 0.75,
+                                header: 0.511811023622047,
+                                footer: 0.511811023622047
+                        }
+                }
                 var data = xlsx.utils.sheet_to_json(ws);
 
                 var email = data.map((item) =>{
