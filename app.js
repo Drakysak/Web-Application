@@ -85,7 +85,7 @@ app.get("/database", async (req,res) => {
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
-                ws = {
+                /*ws = {
                         '!ref': 'A1:J2',
                            '!margins': {
                                 left: 0.7,
@@ -166,7 +166,8 @@ app.get("/database", async (req,res) => {
                                 h: 'strojní_mechanik',
                                 w: 'strojní_mechanik'
                         }
-                }
+                }*/
+                ws = {}
                 var data = xlsx.utils.sheet_to_json(ws);
 
                 var email = data.map((item) =>{
