@@ -85,7 +85,7 @@ app.get("/database", async (req,res) => {
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                 var ws = wb.Sheets["List1"];
-                ws = {
+                /*ws = {
                         '!ref': 'A1:J2',
                         A1: {
                                 t: 's',
@@ -166,7 +166,7 @@ app.get("/database", async (req,res) => {
                                 header: 0.511811023622047,
                                 footer: 0.511811023622047
                         }
-                }
+                }*/
                 var data = xlsx.utils.sheet_to_json(ws);
 
                 var email = data.map((item) =>{
@@ -184,7 +184,7 @@ app.get("/database", async (req,res) => {
                 }
 
                 console.log(data)
-                console.log(xlsx.utils.sheet_add_json(ws, data));
+                xlsx.utils.sheet_add_json(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
                 console.log(ws);
 
