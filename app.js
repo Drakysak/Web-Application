@@ -168,8 +168,8 @@ app.get("/database", async (req,res) => {
                                 w: 'strojní_mechanik'
                         }
                 }*/
-                ws = {}
                 var data = xlsx.utils.sheet_to_json(ws);
+                data =[]
 
                 var email = data.map((item) =>{
 
