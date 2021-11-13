@@ -180,18 +180,13 @@ app.get("/database", async (req,res) => {
                 console.log(email);
 
                 for(var i = 0; i < dataQuery.rows.length; i++){
-                        var condition = email.includes(emailQuery.rows[i]);
-
-                        if(condition){
-                                console.log("v souboru se už nachází");
-                        }else{
-                                data.push(dataQuery.rows[i]);                                
-                        }
+                        data.push(dataQuery.rows[i]);     
                 }
 
                 console.log(data)
                 xlsx.utils.sheet_add_json(ws, data);
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
+                console.log(ws);
 
                 const table = xlsx.utils.sheet_to_html(ws);
                 res.render("data", {
