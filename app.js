@@ -98,7 +98,7 @@ app.get("/database", async (req,res) => {
 
                 const emailQuery = await client.query("SELECT email FROM usersdata");
 
-                for(var i = 0; i < dataQuery.rows.length; i++){
+                for(var i = 0; i < usersDataQuery.rows.length; i++){
                         dataOne.push(usersDataQuery.rows[i]);
                         dataTwo.push(usersQuestionsQuery.rows[i]);
                 }
