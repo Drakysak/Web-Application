@@ -91,7 +91,7 @@ app.get("/database/:id", async (req,res) => {
                 }
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
-                //var data = xlsx.utils.sheet_to_json(ws);
+                var data = xlsx.utils.sheet_to_json(ws);
                 data =[]
 
                 const emailQuery = await client.query("SELECT email FROM usersdata");
