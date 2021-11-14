@@ -81,6 +81,7 @@ app.post("/", async (req, res) => {
 app.get("/database/:id", async (req,res) => {
         const client = await pool.connect();
         try{
+                console.log(req.params.id);
                 var dataQuery = await client.query("SELECT * FROM $1"[req.params.id]);
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
