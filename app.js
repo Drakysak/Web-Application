@@ -81,18 +81,17 @@ app.post("/", async (req, res) => {
 app.get("/database/:id", async (req,res) => {
         const client = await pool.connect();
         try{
-                var dataQuery = await client.query("SELECT * FROM", [req.params.id]);
-                var wb = xlsx.readFile("./Public/data/Data.xlsx");
+
                 if(req.params.id == "usersdata"){
-                        //var dataQuery = await client.query("SELECT * FROM usersdata");
+                        var dataQuery = await client.query("SELECT * FROM usersdata");
                         var ws = wb.Sheets["List1"];
                 }else if(req.params.id == "userquestions"){
-                        //var dataQuery = await client.query("SELECT * FROM userquestions");
+                        var dataQuery = await client.query("SELECT * FROM userquestions");
                         var ws = wb.Sheets["List2"];
                 }
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
-                var data = xlsx.utils.sheet_to_json(ws);
+                //var data = xlsx.utils.sheet_to_json(ws);
                 data =[]
 
                 const emailQuery = await client.query("SELECT email FROM usersdata");
