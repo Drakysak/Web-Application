@@ -84,13 +84,14 @@ app.get("/database/:id", async (req,res) => {
 
                 if(req.params.id == "usersdata"){
                         var dataQuery = await client.query("SELECT * FROM usersdata");
+                        var wb = xlsx.readFile("./Public/data/Data.xlsx");
                         var ws = wb.Sheets["List1"];
                 }else if(req.params.id == "userquestions"){
                         var dataQuery = await client.query("SELECT * FROM userquestions");
+                        var wb = xlsx.readFile("./Public/data/Data.xlsx");
                         var ws = wb.Sheets["List2"];
                 }
-
-                var wb = xlsx.readFile("./Public/data/Data.xlsx");
+                
                 var data = xlsx.utils.sheet_to_json(ws);
                 data =[]
 
