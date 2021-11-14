@@ -78,37 +78,41 @@ app.post("/", async (req, res) => {
         }
 });
 
-app.get("/database/:id", async (req,res) => {
+app.get("/database", async (req,res) => {
         const client = await pool.connect();
         try{
 
-                if(req.params.id == "usersdata"){
-                        var dataQuery = await client.query("SELECT * FROM usersdata");
-                        var wb = xlsx.readFile("./Public/data/Data.xlsx");
-                        var ws = wb.Sheets["List1"];
-                }else if(req.params.id == "userquestions"){
-                        var dataQuery = await client.query("SELECT * FROM userquestions");
-                        var wb = xlsx.readFile("./Public/data/Data.xlsx");
-                        var ws = wb.Sheets["List2"];
-                }
-                
-                var data = xlsx.utils.sheet_to_json(ws);
-                data =[]
+                var usersDataQuery = await client.query("SELECT * FROM usersdata");
+                var usersQuestionsQuery = await client.query("SELECT * FROM userquestions") 
+
+                var wb = xlsx.readFile("./Public/data/Data.xlsx");
+               
+                var wsListOne = wb.Sheets["List1"];
+                var wsListTwo = wb.Sheets["List2"];
+
+                var dataOne = xlsx.utils.sheet_to_json(wsListOne);
+                dataOne = [];
+
+                var dataTwo = xlsx.utils.sheet_to_json(wsListTwo);
+                dataTwo = []; 
 
                 const emailQuery = await client.query("SELECT email FROM usersdata");
 
                 for(var i = 0; i < dataQuery.rows.length; i++){
-                        data.push(dataQuery.rows[i]);     
+                        dataOne.push(usersDataQuery.rows[i]);
+                        dataTwo.push(usersQuestionsQuery.rows[i]);
                 }
 
                 console.log(data)
-                xlsx.utils.sheet_add_json(ws, data);
+                xlsx.utils.sheet_add_json(wsListOne, dataOne);
+                xlsx.utils.sheet_add_json(wsListTwo, dataTwo)
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
-                console.log(ws);
 
-                const table = xlsx.utils.sheet_to_html(ws);
+                const tableOne = xlsx.utils.sheet_to_html(wsListOne);
+                const tableTwo = xlsx.utils.sheet_to_html(wsListTwo);
                 res.render("data", {
-                        dataTable : table
+                        dataTableOne : tableOne,
+                        dataTableTwo : tableTwo 
                 });
 
         }catch(err){
