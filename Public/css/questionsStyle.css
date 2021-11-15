@@ -76,7 +76,6 @@ header{
 }
 
 article{
-    display: flex;
     width: 70%;
     margin: 0 auto;
     background-color: rgb(238, 231, 231);
@@ -86,6 +85,7 @@ article{
 
 article h4{
     font-weight: bold;
+    font-size: 30px;
 }
 
 article p{
