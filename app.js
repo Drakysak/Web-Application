@@ -11,10 +11,10 @@ const pool = new Pool({
         }
 });
 
-pool.on('error', (err, client) => {
-        console.error('Unexpected error on idle client', err) // your callback here
+/*pool.on('error', (err, client) => {
+        console.error('Unexpected error on idle client', err) 
         process.exit(-1)
-})
+})*/
 
 const app = express();
 const port = process.env.PORT || 3000;
