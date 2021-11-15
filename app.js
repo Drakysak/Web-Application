@@ -127,4 +127,8 @@ app.get("/database", async (req,res) => {
         }
 });
 
+app.get("/questions/:id", (req, res) =>{
+        res.render(req.params.id);
+});
+
 app.listen(port);
