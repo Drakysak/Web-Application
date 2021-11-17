@@ -132,7 +132,7 @@ app.get("/questions/:id", (req, res) =>{
 });
 
 app.post("/questions/:id", async(req, res) =>{
-        const client = pool.connect();
+        const client = await pool.connect();
         try{
                 if(req.body.email == "" ){
                         console.log("zdej email")
@@ -140,7 +140,7 @@ app.post("/questions/:id", async(req, res) =>{
         }catch(err){
                 console.log(err);
         }finally{
-                await client.release();
+                client.release();
                 console.log("connection end");
         }
 });
