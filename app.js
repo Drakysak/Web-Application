@@ -134,6 +134,7 @@ app.get("/questions/:id", (req, res) =>{
 app.post("/questions/:id", async(req, res) =>{
         const client = await pool.connect();
         try{
+                console.log(req.params.id)
                 if(req.body.email == "" ){
                         console.log("zdej email")
                 }
