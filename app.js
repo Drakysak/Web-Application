@@ -128,7 +128,9 @@ app.get("/database", async (req,res) => {
 });
 
 app.get("/questions/:id", (req, res) =>{
-        res.render("overeni");
+        res.render("overeni", {
+                question : req.params.id
+        });
 });
 
 app.post("/questions/:id", async(req, res) =>{
