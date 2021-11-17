@@ -134,12 +134,19 @@ app.get("/questions/:id", (req, res) =>{
 app.post("/questions/:id", async(req, res) =>{
         const client = await pool.connect();
         try{
-                console.log(req.params["id"])
-                if(req.body.email == "" ){
-                        console.log("zdej email")
+                const emailQuery = client.query("SELECT email FROM userquestions")
+                var condition = JSON.stringify(emailQuery.rows).includes(req.body.email)
+
+                if(condition){
+                        console.log("platný email")
                 }
+                
+
+
         }catch(err){
+
                 console.log(err);
+
         }finally{
                 client.release();
                 console.log("connection end");
