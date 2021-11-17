@@ -134,15 +134,13 @@ app.get("/questions/:id", (req, res) =>{
 app.post("/questions/:id", async(req, res) =>{
         const client = await pool.connect();
         try{
-                const emailQuery = client.query("SELECT email FROM userquestions")
+                const emailQuery = await client.query("SELECT email FROM userquestions")
                 var condition = JSON.stringify(emailQuery.rows).includes(req.body.email)
 
                 if(condition){
                         console.log("platný email")
                 }
                 
-
-
         }catch(err){
 
                 console.log(err);
