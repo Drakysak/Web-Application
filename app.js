@@ -142,6 +142,7 @@ app.post("/questions/:id", async(req, res) =>{
         }finally{
                 client.release();
                 console.log("connection end");
+                res.redirect(req.url);
         }
 });
 
