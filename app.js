@@ -135,11 +135,28 @@ app.post("/questions/:id", async(req, res) =>{
         const client = await pool.connect();
         try{
                 const emailQuery = await client.query("SELECT email FROM userquestions")
-                console.log(emailQuery.rows)
+                
                 var condition = JSON.stringify(emailQuery.rows).includes(req.body.email)
 
                 if(condition){
-                        console.log("platný email")
+                        if(req.params.id == "q1"){
+                                client.query("UPDATE userquestions SET q1 =" + req.params.id + "WHERE email =" + req.body.email)
+
+                        }else if(req.params.id == "q2"){
+                                client.query("INSERT INTO userquestions (q2) VALUES ($1)", [req.body.odpoved])
+
+                        }else if(req.params.id == "q3"){
+                                client.query("INSERT INTO userquestions (q3) VALUES ($1)", [req.body.odpoved])
+
+                        }else if(req.params.id == "q4"){
+                                client.query("INSERT INTO userquestions (q4) VALUES ($1)", [req.body.odpoved])
+
+                        }else if(req.params.id == "q5"){
+                                client.query("INSERT INTO userquestions (q5) VALUES ($1)", [req.body.odpoved])
+                        }
+                        
+                }else{
+                        console.log("neplatný email")
                 }
                 
         }catch(err){
