@@ -128,20 +128,15 @@ app.get("/database", async (req,res) => {
 });
 
 app.get("/questions/:id", (req, res) =>{
-        res.render("overeni", {
-                question : req.params.id
-        });
+        res.render(req.params.id);
 });
 
 app.post("/questions/:id", async(req, res) =>{
         const client = pool.connect();
         try{
-               if(req.body.emial == ""){
-                       console.log("email")
-
-               }else if(req.body.odpoved == ""){
-                       res.redirect("/questions/" + req.params.id)
-               }
+                if(req.body.email == "" ){
+                        console.log("zdej email")
+                }
         }catch(err){
                 console.log(err);
         }finally{
