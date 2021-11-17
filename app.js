@@ -128,7 +128,23 @@ app.get("/database", async (req,res) => {
 });
 
 app.get("/questions/:id", (req, res) =>{
-        res.render(req.params.id + ".ejs");
+        res.render("overeni");
+});
+
+app.post("/questions/:id", async(req, res) =>{
+        const client = pool.connect();
+        try{
+                if(req.body.email == ""){
+                        console.log("zadej email")
+                }else if(req.body.odpoved == ""){
+                        res.redirect("/questions/" + req.params.id);
+                }
+        }catch(err){
+                console.log(err);
+        }finally{
+                await client.release();
+                console.log("connection end");
+        }
 });
 
 app.listen(port);
