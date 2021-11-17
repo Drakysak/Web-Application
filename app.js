@@ -134,11 +134,12 @@ app.get("/questions/:id", (req, res) =>{
 app.post("/questions/:id", async(req, res) =>{
         const client = pool.connect();
         try{
-                if(req.body.email == ""){
-                        console.log("zadej email")
-                }else if(req.body.odpoved == ""){
-                        res.redirect("/questions/" + req.params.id);
-                }
+               if(req.body.emial == ""){
+                       console.log("email")
+
+               }else if(req.body.odpoved == ""){
+                       res.redirect("/questions/" + req.params.id)
+               }
         }catch(err){
                 console.log(err);
         }finally{
