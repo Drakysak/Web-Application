@@ -83,7 +83,9 @@ app.get("/database", async (req,res) => {
         try{
 
                 var usersDataQuery = await client.query("SELECT * FROM usersdata");
-                var usersQuestionsQuery = await client.query("SELECT * FROM userquestions") 
+                var usersQuestionsQuery = await client.query("SELECT * FROM userquestions")
+                
+                console.log(usereQuestionsQuerry);
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                
