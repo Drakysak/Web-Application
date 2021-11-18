@@ -139,22 +139,8 @@ app.post("/questions/:id", async(req, res) =>{
                 var condition = JSON.stringify(emailQuery.rows).includes(req.body.email)
 
                 if(condition){
-                        if(req.params.id == "q1"){
-                                client.query("UPDATE userquestions SET q1 = ano WHERE email = ivo.mato@seznam.cz")
-                                console.log()
-
-                        }else if(req.params.id == "q2"){
-                                client.query("INSERT INTO userquestions (q2) VALUES ($1)", [req.body.odpoved])
-
-                        }else if(req.params.id == "q3"){
-                                client.query("INSERT INTO userquestions (q3) VALUES ($1)", [req.body.odpoved])
-
-                        }else if(req.params.id == "q4"){
-                                client.query("INSERT INTO userquestions (q4) VALUES ($1)", [req.body.odpoved])
-
-                        }else if(req.params.id == "q5"){
-                                client.query("INSERT INTO userquestions (q5) VALUES ($1)", [req.body.odpoved])
-                        }
+                        
+                        client.query("UPDATE userquestions SET" + req.params.id + "=" + req.body.odpoved + "WHERE email =" + req.body.email);
                         
                 }else{
                         console.log("neplatný email")
