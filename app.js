@@ -157,7 +157,6 @@ app.post("/questions/:id", async(req, res) =>{
                         }
                         
                 }else{
-                        console.log(req.params.id)
                         console.log("neplatný email")
                 }
                 
@@ -168,6 +167,7 @@ app.post("/questions/:id", async(req, res) =>{
         }finally{
                 client.release();
                 console.log("connection end");
+                console.log(req.params.id)
                 res.redirect("/questions/" + req.params.id);
         }
 });
