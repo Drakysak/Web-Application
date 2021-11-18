@@ -141,6 +141,7 @@ app.post("/questions/:id", async(req, res) =>{
                 if(condition){
                         if(req.params.id == "q1"){
                                 client.query("UPDATE userquestions SET q1 = ano WHERE email = ivo.mato@seznam.cz")
+                                console.log()
 
                         }else if(req.params.id == "q2"){
                                 client.query("INSERT INTO userquestions (q2) VALUES ($1)", [req.body.odpoved])
@@ -156,6 +157,7 @@ app.post("/questions/:id", async(req, res) =>{
                         }
                         
                 }else{
+                        console.log(req.params.id)
                         console.log("neplatný email")
                 }
                 
