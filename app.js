@@ -140,7 +140,7 @@ app.post("/questions/:id", async(req, res) =>{
 
                 if(condition){
                         
-                        client.query("UPDATE userquestions SET" + req.params.id + "=" + req.body.odpoved + "WHERE email =" + req.body.email);
+                        client.query("UPDATE userquestions SET '" + req.params.id + "' = '" + req.body.odpoved + "' WHERE email = '" + req.body.email + "'");
                         
                 }else{
                         console.log("neplatný email")
