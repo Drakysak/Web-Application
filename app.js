@@ -2,7 +2,8 @@ const { render } = require("ejs");
 const { Pool } = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
-const { json } = require("body-parser");
+const flash = require("connect-flash")
+
 
 const pool = new Pool({
         connectionString: process.env.DATABASE_URL,
@@ -11,15 +12,11 @@ const pool = new Pool({
         }
 });
 
-/*pool.on('error', (err, client) => {
-        console.error('Unexpected error on idle client', err) 
-        process.exit(-1)
-})*/
-
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: false}))
+app.use(flash())
 
 app.use(express.static("Public"));
 app.use("/css", express.static(__dirname + "Public/css"));
@@ -36,7 +33,10 @@ var data = xlsx.utils.sheet_to_json(ws);
 
 
 app.get("/", (req, res) => {
-        res.render("index");
+        res.render("index", {
+                messageSuccess : req.flash("messageSuccess"),
+                messageError: req.flash("messageError")
+        });
 });
 
 app.post("/", async (req, res) => {
@@ -47,6 +47,12 @@ app.post("/", async (req, res) => {
                 const condition = JSON.stringify(emailQuery.rows).includes(req.body.Email);
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
+                        if(req.body.Jmeno == "" || req.body.Prijmeni || req.body.Email){
+                                req.flash("messageError", "Jmeno, příjmení nebo email není vyplněno !")
+                        }
+                        if(condition){
+                                req.flash("messageError", "Email již byl použit !");
+                        }
                         console.log("něco je špatně")
                 }else{
                         await client.query("INSERT INTO usersdata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", [
@@ -66,6 +72,8 @@ app.post("/", async (req, res) => {
 
                         const query = await client.query("SELECT * FROM usersdata");
 
+                        req.flash("messageSuccess", "Účet úspěšně vytvořen !")
+                        
                         console.log(query.rows);
                 }
                 
@@ -84,8 +92,6 @@ app.get("/database", async (req,res) => {
 
                 var usersDataQuery = await client.query("SELECT * FROM usersdata");
                 var usersQuestionsQuery = await client.query("SELECT * FROM userquestions")
-                
-                console.log(usersQuestionsQuery.rows);
 
                 var wb = xlsx.readFile("./Public/data/Data.xlsx");
                
