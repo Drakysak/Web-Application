@@ -45,6 +45,8 @@ app.get("/", (req, res) => {
                 messageSuccess : req.flash("messageSuccess"),
                 messageError: req.flash("messageError")
         });
+
+        console.log(req.flash('messageError'));
 });
 
 app.post("/", async (req, res) => {
@@ -59,7 +61,7 @@ app.post("/", async (req, res) => {
                                 req.flash("messageError", "Jmeno, příjmení nebo email není vyplněno !")
                         }
                         if(condition){
-                                req.flash("messageError", "Email již byl použit !");
+                                req.flash('messageError', "Email již byl použit !");
                         }
                         console.log("něco je špatně")
                 }else{
