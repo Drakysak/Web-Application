@@ -2,7 +2,9 @@ const { render } = require("ejs");
 const { Pool } = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
-const flash = require("connect-flash")
+const sessions = require("express-session");
+const flash = require("connect-flash");
+const { cookie } = require("express-validator");
 
 
 const pool = new Pool({
@@ -16,6 +18,12 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: false}))
+app.use(sessions({
+        secret : "secret",
+        cookie : {maxAge : 60000},
+        resave : false,
+        saveUninitialized : false  
+}));
 app.use(flash())
 
 app.use(express.static("Public"));
