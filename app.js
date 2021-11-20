@@ -58,7 +58,7 @@ app.post("/", async (req, res) => {
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
                         if(req.body.Jmeno == "" || req.body.Prijmeni || req.body.Email){
-                                req.flash("messageError", "Jmeno, příjmení nebo email není vyplněno !")
+                                req.flash('messageError', "Jmeno, příjmení nebo email není vyplněno !")
                         }
                         if(condition){
                                 req.flash('messageError', "Email již byl použit !");
