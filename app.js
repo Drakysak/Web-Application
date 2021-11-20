@@ -4,7 +4,6 @@ const express = require("express");
 const xlsx = require("xlsx");
 const sessions = require("express-session");
 const flash = require("connect-flash");
-const { cookie } = require("express-validator");
 
 
 const pool = new Pool({
@@ -20,9 +19,8 @@ const port = process.env.PORT || 3000;
 app.use(express.urlencoded({extended: false}))
 app.use(sessions({
         secret : "secret",
-        cookie : {maxAge : 60000},
-        resave : false,
-        saveUninitialized : false  
+        resave : true,
+        saveUninitialized : true  
 }));
 app.use(flash())
 
