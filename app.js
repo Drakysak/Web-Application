@@ -170,22 +170,44 @@ app.post("/questions/:id", async(req, res) =>{
 
                                 const condition = client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
 
-                                console.log(condition);
-
                                 if (condition == ""){
                                         client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                 }else{
                                         req.flash('message', 'Už jse odpovídali!');
-                                        console.log("už jsi hlasoval");
                                 }
                         }else if(req.params.id == "q2"){
-                                client.query("UPDATE userquestions SET q2 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+
+                                const condition = client.query("SELECT q2 FROM userQuestions WHERE email = $1", [req.body.email]);
+        
+                                if (condition == ""){
+                                        client.query("UPDATE userquestions SET q2 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                }else{
+                                        req.flash('message', 'Už jse odpovídali!');
+                                }
                         }else if(req.params.id == "q3"){
-                                client.query("UPDATE userquestions SET q3 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                const condition = client.query("SELECT q3 FROM userQuestions WHERE email = $1", [req.body.email]);
+        
+                                if (condition == ""){
+                                        client.query("UPDATE userquestions SET q3 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                }else{
+                                        req.flash('message', 'Už jse odpovídali!');
+                                }
                         }else if(req.params.id == "q4"){
-                                client.query("UPDATE userquestions SET q4 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                const condition = client.query("SELECT q4 FROM userQuestions WHERE email = $1", [req.body.email]);
+        
+                                if (condition == ""){
+                                        client.query("UPDATE userquestions SET q4 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                }else{
+                                        req.flash('message', 'Už jse odpovídali!');
+                                }
                         }else if(req.params.id == "q5"){
-                                client.query("UPDATE userquestions SET q5 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                const condition = client.query("SELECT q5 FROM userQuestions WHERE email = $1", [req.body.email]);
+        
+                                if (condition == ""){
+                                        client.query("UPDATE userquestions SET q5 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                }else{
+                                        req.flash('message', 'Už jse odpovídali!');
+                                }
                         }
                         
                 }else{
@@ -200,7 +222,6 @@ app.post("/questions/:id", async(req, res) =>{
         }finally{
                 client.release();
                 console.log("connection end");
-                console.log(req.params.id)
                 res.redirect("/questions/" + req.params.id);
         }
 });
