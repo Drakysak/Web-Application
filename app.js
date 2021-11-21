@@ -163,12 +163,12 @@ app.post("/questions/:id", async(req, res) =>{
                 
                 var condition = JSON.stringify(emailQuery.rows).includes(req.body.email)
 
-
-
                 if(condition){
                         if(req.params.id == "q1"){
 
                                 const condition = client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
+
+                                console.log(condition);
 
                                 if (condition == ""){
                                         client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
