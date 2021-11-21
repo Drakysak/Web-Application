@@ -4,6 +4,7 @@ const express = require("express");
 const xlsx = require("xlsx");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
 
 
 const pool = new Pool({
@@ -24,6 +25,7 @@ app.use(session({
         resave : true,
         saveUninitialized : true  
 }));
+app.use(flash());
 
 app.use(express.static("Public"));
 app.use("/css", express.static(__dirname + "Public/css"));
@@ -38,14 +40,11 @@ var wb = xlsx.readFile("./Public/data/Data.xlsx");
 var ws = wb.Sheets["List1"];
 var data = xlsx.utils.sheet_to_json(ws);
 
-app.use((res, req, next) =>{
-        res.locals.message = req.session.message
-        delete req.session.message
-        next()
-});
-
 app.get("/", (req, res) => {
-        res.render("index");
+        const message = req.flash('message')
+        res.render("index", {
+                message
+        });
 });
 
 app.post("/", async (req, res) => {
@@ -58,18 +57,10 @@ app.post("/", async (req, res) => {
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
 
                         if(req.body.Jmeno == "" || req.body.Prijmeni || req.body.Email){
-                                req.session.message = {
-                                        type : "danger",
-                                        intro : "Prázdná pole",
-                                        message : "Prosím vyplňte všechna pole !"
-                                }
+                                req.flash('message', 'Prosím vyplňte všechny pole');
                         }
                         if(condition){
-                                req.session.message ={
-                                        type : "danger",
-                                        intro : "Email byl použit",
-                                        message : "Tento email byl již použit, použíte jiný email !"
-                                } 
+                                req.flash('message', 'Tento email byl již použit, použíte jiný email !');
                         }
 
                         console.log("něco je špatně")

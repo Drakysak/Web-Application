@@ -31,8 +31,8 @@
                 </p>
             </article>
             <%if (message){%>
-                <div style="text-align: center;" class="alert alert- <%= message.type%>">
-                    <strong><%= message.intro%></strong> <%= message.message %>
+                <div style="text-align: center;" class="alert alert-danger">
+                    <%= message.message %>
                 </div>
             <%}%>
             
