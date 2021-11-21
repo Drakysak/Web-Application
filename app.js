@@ -149,7 +149,11 @@ app.get("/database", async (req,res) => {
 });
 
 app.get("/questions/:id", (req, res) =>{
-        res.render(req.params.id);
+        const message = req.flash('message')
+
+        res.render(req.params.id, {
+                message
+        });
 });
 
 app.post("/questions/:id", async(req, res) =>{
@@ -173,6 +177,7 @@ app.post("/questions/:id", async(req, res) =>{
                         }
                         
                 }else{
+                        req.flash('message', 'Email není zaregistrován')
                         console.log("neplatný email")
                 }
                 
