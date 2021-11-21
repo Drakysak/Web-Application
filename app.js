@@ -2,8 +2,7 @@ const { render } = require("ejs");
 const { Pool } = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
-const sessions = require("express-session");
-const flash = require("connect-flash");
+const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
 
@@ -19,7 +18,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser('secretStringForCookie'));
-app.use(sessions({
+app.use(session({
         secret : 'secret',
         cookie : {maxAge : 60000},
         resave : true,
@@ -40,16 +39,14 @@ var wb = xlsx.readFile("./Public/data/Data.xlsx");
 var ws = wb.Sheets["List1"];
 var data = xlsx.utils.sheet_to_json(ws);
 
+app.use((res, req, next) =>{
+        res.locals.message = req.session.message
+        delete req.session.message
+        next()
+});
 
 app.get("/", (req, res) => {
-        const messageSuccess = req.flash('messageSuccess')
-        const messageError = req.flash('messageError')
-        res.render("index", {
-                messageSuccess,
-                messageError
-        });
-
-        console.log(req.flash('messageError'));
+        res.render("index");
 });
 
 app.post("/", async (req, res) => {
@@ -62,10 +59,18 @@ app.post("/", async (req, res) => {
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
 
                         if(req.body.Jmeno == "" || req.body.Prijmeni || req.body.Email){
-                                req.flash('messageError', 'Jmeno, příjmení nebo email není vyplněno !');
+                                req.session.message = {
+                                        type : "danger",
+                                        intro : "Prázdná pole",
+                                        message : "Prosím vyplňte všechna pole !"
+                                }
                         }
                         if(condition){
-                                req.flash('messageError', 'Email již byl použit !');
+                                req.session.message ={
+                                        type : "danger",
+                                        intro : "Email byl použit",
+                                        message : "Tento email byl již použit, použíte jiný email !"
+                                } 
                         }
 
                         console.log("něco je špatně")
