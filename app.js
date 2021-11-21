@@ -42,6 +42,7 @@ var data = xlsx.utils.sheet_to_json(ws);
 
 app.get("/", (req, res) => {
         const message = req.flash('message')
+        console.log(message)
         res.render("index", {
                 message
         });
