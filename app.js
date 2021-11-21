@@ -42,10 +42,9 @@ var ws = wb.Sheets["List1"];
 var data = xlsx.utils.sheet_to_json(ws);
 
 app.get("/", (req, res) => {
-        const message = req.flash('message')
-        console.log(message)
+        console.log(req.flash('message'))
         res.render("index", {
-                message
+                message : req.flash('message')
         });
 });
 
