@@ -4,6 +4,7 @@ const express = require("express");
 const xlsx = require("xlsx");
 const sessions = require("express-session");
 const flash = require("connect-flash");
+const cookieParser = require("cookie-parser");
 
 
 const pool = new Pool({
@@ -16,9 +17,11 @@ const pool = new Pool({
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: false}));
+app.use(cookieParser("secretStringForCookie"));
 app.use(sessions({
         secret : "secret",
+        cookie : {maxAge : 60000},
         resave : true,
         saveUninitialized : true  
 }));
@@ -41,7 +44,7 @@ var data = xlsx.utils.sheet_to_json(ws);
 app.get("/", (req, res) => {
         res.render("index", {
                 messageSuccess : req.flash('messageSuccess'),
-                messageError: req.flash('messageError')
+                messageError : req.flash('messageError')
         });
 
         console.log(req.flash('messageError'));
@@ -55,15 +58,16 @@ app.post("/", async (req, res) => {
                 const condition = JSON.stringify(emailQuery.rows).includes(req.body.Email);
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
+
                         if(req.body.Jmeno == "" || req.body.Prijmeni || req.body.Email){
-                                req.flash('messageError', 'Jmeno, příjmení nebo email není vyplněno !')
-                                console.log("jmena");
+                                req.flash('messageError', 'Jmeno, příjmení nebo email není vyplněno !');
                         }
                         if(condition){
                                 req.flash('messageError', 'Email již byl použit !');
-                                console.log("email");
                         }
+
                         console.log("něco je špatně")
+
                 }else{
                         await client.query("INSERT INTO usersdata VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", [
                                 req.body.Jmeno,
