@@ -62,7 +62,7 @@ app.post("/", async (req, res) => {
                                 req.flash('message', 'Prosím vyplňte všechny pole');
                         }
                         if(condition && req.body.Email != ""){
-                                req.flash('messageError', 'Tento email byl již použit, použíte jiný email !');
+                                req.flash('message', 'Tento email byl již použit, použíte jiný email !');
                         }
 
                         console.log("něco je špatně")
