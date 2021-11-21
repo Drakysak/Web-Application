@@ -23,6 +23,13 @@
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis fugit accusantium velit deserunt in fuga sint dolore, eius eos voluptatum deleniti, reprehenderit dolor ea iure!
                 </p>
             </article>
+
+            <% if(message.length > 0){ %>
+                <div style="text-align: center;" class="alert alert-danger">
+                    <%= message %>
+                </div>
+            <% } %>
+
             <form action="/questions/q4" method="post">
                 <div>
                     <label for="email">Email kterým jste se zaregistrovali</label>
