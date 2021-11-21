@@ -187,10 +187,10 @@ app.post("/questions/:id", async(req, res) =>{
 
                                 console.log(condition);
         
-                                if (condition){
-                                        client.query("UPDATE userquestions SET q3 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
-                                }else{
+                                if (condition != ""){
                                         req.flash('message', 'Už jse odpovídali!');
+                                }else{
+                                        client.query("UPDATE userquestions SET q3 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                 }
                         }else if(req.params.id == "q4"){
                                 const condition = client.query("SELECT q4 FROM userQuestions WHERE email = $1", [req.body.email]);
