@@ -43,9 +43,9 @@ var data = xlsx.utils.sheet_to_json(ws);
 
 app.get("/", (req, res) => {
         console.log(req.flash('messageError'))
-        const message = req.flash('message');
+        const messageError = req.flash('messageError');
         res.render("index", {
-                message
+                messageError
         });
 });
 
@@ -59,7 +59,7 @@ app.post("/", async (req, res) => {
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
 
                         if(req.body.Jmeno == "" || req.body.Prijmeni || req.body.Email){
-                                req.flash('message', 'Prosím vyplňte všechny pole');
+                                req.flash('messageError', 'Prosím vyplňte všechny pole');
                         }
                         if(condition){
                                 req.flash('messageError', 'Tento email byl již použit, použíte jiný email !');
