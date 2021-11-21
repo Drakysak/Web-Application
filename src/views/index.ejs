@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
     <title>Document</title>
-    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
@@ -24,7 +24,7 @@
                     Zaškrtněte obory o které máte zájem. <strong>Formulář můžete odeslat jen jednou!</strong>
                 </p>
             </article>
-            <%if (message.lenght > 0){%>
+            <%if (message){%>
                 <div style="text-align: center;" class="alert alert-danger">
                     <%= message.message %>
                 </div>
