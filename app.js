@@ -2,8 +2,8 @@ const { render } = require("ejs");
 const { Pool } = require("pg");
 const express = require("express");
 const xlsx = require("xlsx");
-const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const session = require("express-session");
 const flash = require("connect-flash");
 
 
@@ -12,13 +12,14 @@ const pool = new Pool({
         ssl: {
                 rejectUnauthorized: false
         }
+        
 });
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: false}));
-app.use(cookieParser('secretStringForCookie'));
+app.use(cookieParser('keyboard cat'));
 app.use(session({
         secret : 'secret',
         cookie : {maxAge : 60000},
