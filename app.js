@@ -18,14 +18,14 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: false}));
-app.use(cookieParser("secretStringForCookie"));
+app.use(cookieParser('secretStringForCookie'));
 app.use(sessions({
-        secret : "secret",
+        secret : 'secret',
         cookie : {maxAge : 60000},
         resave : true,
         saveUninitialized : true  
 }));
-app.use(flash())
+app.use(flash());
 
 app.use(express.static("Public"));
 app.use("/css", express.static(__dirname + "Public/css"));
@@ -42,9 +42,11 @@ var data = xlsx.utils.sheet_to_json(ws);
 
 
 app.get("/", (req, res) => {
+        const messageSuccess = req.flash('messageSuccess')
+        const messageError = req.flash('messageError')
         res.render("index", {
-                messageSuccess : req.flash('messageSuccess'),
-                messageError : req.flash('messageError')
+                messageSuccess,
+                messageError
         });
 
         console.log(req.flash('messageError'));
