@@ -24,7 +24,6 @@ app.use(session({
         resave : true,
         saveUninitialized : true  
 }));
-app.use(flash());
 
 app.use(express.static("Public"));
 app.use("/css", express.static(__dirname + "Public/css"));
