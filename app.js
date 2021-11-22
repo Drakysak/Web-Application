@@ -171,7 +171,7 @@ app.post("/questions/:id", async(req, res) =>{
                                 
                                 if(conditions.rows.length == 0){
 
-                                        await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                        client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                 }else{
                                         console.log("error")
                                 }
