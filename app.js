@@ -163,9 +163,9 @@ app.post("/questions/:id", async(req, res) =>{
                 
                 var condition = JSON.stringify(emailQuery.rows).includes(req.body.email)
 
-                const condition = client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
+                const conditions = client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
 
-                console.log(condition);
+                console.log(conditions);
 
                 if(condition){
                         if(req.params.id == "q1"){
