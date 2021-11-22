@@ -169,7 +169,7 @@ app.post("/questions/:id", async(req, res) =>{
 
                 if(condition){
                         if(req.params.id == "q1"){
-                                const conditions = client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
+                                const conditions = await client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
 
                                 console.log(conditions);
                                 
