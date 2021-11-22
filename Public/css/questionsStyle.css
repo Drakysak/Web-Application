@@ -95,6 +95,11 @@ article p{
     margin-left: 5px;
 }
 
+p strong{
+    font-weight: bold;
+    color: red;
+}
+
 form{
     width: 70%;
     margin: 70px auto;

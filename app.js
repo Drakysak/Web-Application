@@ -58,7 +58,7 @@ app.post("/", async (req, res) => {
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
 
-                        if((req.body.Jmeno == "" || req.body.Prijmeni || req.body.Email) && !condition ){
+                        if((req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == "") && !condition ){
                                 req.flash('message', 'Prosím vyplňte všechny pole!');
                         }
                         if(condition && req.body.Email != ""){
