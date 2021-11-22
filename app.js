@@ -133,8 +133,13 @@ app.get("/database", async (req,res) => {
                 xlsx.utils.sheet_add_json(wsListTwo, dataTwo)
                 xlsx.writeFile(wb, "./Public/data/Data.xlsx");
 
-                const tableOne = xlsx.utils.sheet_to_html(wsListOne);
-                const tableTwo = xlsx.utils.sheet_to_html(wsListTwo);
+                var wbSaved = xlsx.readFile("./Public/data/Data.xlsx");
+
+                var wsListOneSaved = wbSaved.Sheets["List1"];
+                var wsListTwoSaved = wbSaved.Sheets["List2"];
+
+                const tableOne = xlsx.utils.sheet_to_html(wsListOneSaved);
+                const tableTwo = xlsx.utils.sheet_to_html(wsListTwoSaved);
                 res.render("data", {
                         dataTableOne : tableOne,
                         dataTableTwo : tableTwo 
