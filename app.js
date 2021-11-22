@@ -169,7 +169,7 @@ app.post("/questions/:id", async(req, res) =>{
                                 
                                 console.log(conditions.rows);
                                 
-                                if(conditions != "Promise { <pending> }"){
+                                if(conditions.rows.length == 0){
 
                                         await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                 }else{
