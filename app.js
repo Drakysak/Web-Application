@@ -163,10 +163,6 @@ app.post("/questions/:id", async(req, res) =>{
                 
                 var condition = JSON.stringify(emailQuery.rows).includes(req.body.email)
 
-                const conditions = client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
-
-                console.log(conditions);
-
                 if(condition){
                         if(req.params.id == "q1"){
                                 const conditions = await client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
