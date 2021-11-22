@@ -165,11 +165,13 @@ app.post("/questions/:id", async(req, res) =>{
 
                 if(condition){
                         if(req.params.id == "q1"){
-                                const conditions = await client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
+                                const condition = await client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
+
+                                const conditions = JSON.stringify(condition.rows).includes("null");
                                 
                                 console.log(conditions.rows);
                                 
-                                if(conditions.rows == "null"){
+                                if(conditions){
 
                                         client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                 }else{
@@ -178,10 +180,12 @@ app.post("/questions/:id", async(req, res) =>{
 
                                 
                         }else if(req.params.id == "q2"){
-                                const conditions = client.query("SELECT q2 FROM userQuestions WHERE email = $1", [req.body.email]);
+                                const condition = client.query("SELECT q2 FROM userQuestions WHERE email = $1", [req.body.email]);
+
+                                const conditions = JSON.stringify(condition.rows).includes("null");
 
                                 console.log(conditions);
-                                if(conditions == null){
+                                if(conditions){
                                         client.query("UPDATE userquestions SET q2 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                 }else{
                                         console.log("error")
