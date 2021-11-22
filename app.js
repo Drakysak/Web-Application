@@ -167,7 +167,7 @@ app.post("/questions/:id", async(req, res) =>{
                         if(req.params.id == "q1"){
                                 const conditions = await client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
                                 
-                                console.log(conditions);
+                                console.log(conditions.rows);
                                 
                                 if(conditions != "Promise { <pending> }"){
 
