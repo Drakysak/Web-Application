@@ -43,9 +43,11 @@ var data = xlsx.utils.sheet_to_json(ws);
 
 app.get("/", (req, res) => {
         const message = req.flash('message');
+        const success = req.flash('success')
         console.log(message)
         res.render("index", {
-                message
+                message,
+                success
         });
 });
 
@@ -62,7 +64,6 @@ app.post("/", async (req, res) => {
 
                         if((req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == "") && !condition ){
                                 req.flash('message', 'Prosím vyplňte všechny pole!');
-                                l
                         }
                         if(condition && req.body.Email != ""){
                                 req.flash('message', 'Tento email byl již použit, použíte jiný email!');
@@ -88,7 +89,7 @@ app.post("/", async (req, res) => {
 
                         const query = await client.query("SELECT * FROM usersdata");
 
-                        req.flash("messageSuccess", "Účet úspěšně vytvořen !")
+                        req.flash("success", "Účet úspěšně vytvořen !")
                         
                         console.log(query.rows);
                 }
