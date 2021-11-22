@@ -182,8 +182,14 @@ app.post("/questions/:id", async(req, res) =>{
 
                                 
                         }else if(req.params.id == "q2"){
+                                const conditions = client.query("SELECT q2 FROM userQuestions WHERE email = $1", [req.body.email]);
 
-                                client.query("UPDATE userquestions SET q2 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                console.log(conditions);
+                                if(conditions == null){
+                                        client.query("UPDATE userquestions SET q2 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                }else{
+                                        console.log("error")
+                                }
 
                         }else if(req.params.id == "q3"){
                                         
