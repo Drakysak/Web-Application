@@ -198,7 +198,7 @@ app.post("/questions/:id", async(req, res) =>{
                                 if(conditions){
 
                                         if(req.body.odpoved != ""){
-                                                await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                await client.query("UPDATE userquestions SET q2 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                                 
                                                 req.flash('success', 'Odpověď úspěšně odeslána');
                                         }else{
@@ -219,7 +219,7 @@ app.post("/questions/:id", async(req, res) =>{
 
                                         if(req.body.odpoved != ""){
 
-                                                await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                await client.query("UPDATE userquestions SET q3 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                                 
                                                 req.flash('success', 'Odpověď úspěšně odeslána');
                                         }else{
@@ -240,7 +240,7 @@ app.post("/questions/:id", async(req, res) =>{
 
                                         if(req.body.odpoved != ""){
 
-                                                await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                await client.query("UPDATE userquestions SET q4 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                                 
                                                 req.flash('success', 'Odpověď úspěšně odeslána');
                                         }else{
@@ -261,13 +261,13 @@ app.post("/questions/:id", async(req, res) =>{
 
                                         if(req.body.odpoved != ""){
 
-                                                await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                await client.query("UPDATE userquestions SET q5 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                                 
                                                 req.flash('success', 'Odpověď úspěšně odeslána');
                                         }else{
                                                 req.flash('error', 'Nezadal jste odpověď')
                                         }
-                                        
+
                                 }else{
                                         req.flash('error', 'Už jste odpovídali');
                                 }
