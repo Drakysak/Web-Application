@@ -56,10 +56,13 @@ app.post("/", async (req, res) => {
 
                 const condition = JSON.stringify(emailQuery.rows).includes(req.body.Email);
 
+                console.log(condition);
+
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
 
                         if((req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == "") && !condition ){
                                 req.flash('message', 'Prosím vyplňte všechny pole!');
+                                l
                         }
                         if(condition && req.body.Email != ""){
                                 req.flash('message', 'Tento email byl již použit, použíte jiný email!');
