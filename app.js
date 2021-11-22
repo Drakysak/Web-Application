@@ -169,7 +169,7 @@ app.post("/questions/:id", async(req, res) =>{
                                 
                                 console.log(conditions.rows);
                                 
-                                if(conditions.rows == null){
+                                if(conditions.rows == "null"){
 
                                         client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                 }else{
