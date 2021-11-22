@@ -42,11 +42,11 @@ var ws = wb.Sheets["List1"];
 var data = xlsx.utils.sheet_to_json(ws);
 
 app.get("/", (req, res) => {
-        const message = req.flash('message');
+        const error = req.flash('error');
         const success = req.flash('success')
         console.log(message)
         res.render("index", {
-                message,
+                error,
                 success
         });
 });
@@ -63,10 +63,10 @@ app.post("/", async (req, res) => {
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
 
                         if((req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == "") && !condition ){
-                                req.flash('message', 'Prosím vyplňte všechny pole!');
+                                req.flash('error', 'Prosím vyplňte všechny pole!');
                         }
                         if(condition && req.body.Email != ""){
-                                req.flash('message', 'Tento email byl již použit, použíte jiný email!');
+                                req.flash('error', 'Tento email byl již použit, použíte jiný email!');
                         }
 
                         console.log("něco je špatně")
@@ -89,7 +89,7 @@ app.post("/", async (req, res) => {
 
                         const query = await client.query("SELECT * FROM usersdata");
 
-                        req.flash("success", "Účet úspěšně vytvořen !")
+                        req.flash("success", "Účet byl úspěšně vytvořen !");
                         
                         console.log(query.rows);
                 }
