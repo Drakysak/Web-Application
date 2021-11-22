@@ -173,7 +173,7 @@ app.post("/questions/:id", async(req, res) =>{
 
                                 console.log(conditions);
                                 
-                                if(conditions == null){
+                                if(conditions != "Promise { <pending> }"){
 
                                         client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                 }else{
