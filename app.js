@@ -169,13 +169,13 @@ app.post("/questions/:id", async(req, res) =>{
 
                 if(condition){
                         if(req.params.id == "q1"){
-                                const conditions = await client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]).then(function(result){
-                                        console.log(result);
-                                })
+                                const conditions = await client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
+                                
+                                console.log(conditions);
                                 
                                 if(conditions != "Promise { <pending> }"){
 
-                                        client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                        await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
                                 }else{
                                         console.log("error")
                                 }
