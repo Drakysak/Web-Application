@@ -62,11 +62,13 @@ app.post("/", async (req, res) => {
 
                 if( condition || req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == ""){
 
-                        if((req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == "") && !condition ){
+                        /*if((req.body.Jmeno == "" || req.body.Prijmeni == "" || req.body.Email == "") && !condition ){
                                 req.flash('error', 'Prosím vyplňte všechny pole!');
-                        }
+                        }*/
                         if(condition && req.body.Email != ""){
                                 req.flash('error', 'Tento email byl již použit, použíte jiný email!');
+                        }else{
+                                req.flash('error', 'Prosím vyplňte všechny pole!');
                         }
 
                         console.log("něco je špatně")
