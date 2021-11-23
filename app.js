@@ -170,117 +170,121 @@ app.get("/questions/:id", (req, res) =>{
 app.post("/questions/:id", async(req, res) =>{
         const client = await pool.connect();
         try{
-                const emailQuery = await client.query("SELECT email FROM userquestions")
                 
-                var condition = JSON.stringify(emailQuery.rows).includes(req.body.email)
-
-                if(condition){
-                        if(req.params.id == "q1"){
-                                const condition = await client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
-
-                                const conditions = JSON.stringify(condition.rows).includes("null");
-                                
-                                if(conditions){
-                                        if(req.body.odpoved != ""){
-
-                                                await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
-                                                
-                                                req.flash('success', 'Odpověď úspěšně odeslána');
-                                        }else{
-                                                req.flash('error', 'Nezadal jste odpověď')
-                                        }
-
-                                }else{
-                                        req.flash('error', 'Už jste odpovídali');
-                                }
-
-                                
-                        }else if(req.params.id == "q2"){
-                                const condition = await client.query("SELECT q2 FROM userQuestions WHERE email = $1", [req.body.email]);
-
-                                const conditions = JSON.stringify(condition.rows).includes("null");
-                                
-                                if(conditions){
-
-                                        if(req.body.odpoved != ""){
-                                                await client.query("UPDATE userquestions SET q2 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
-                                                
-                                                req.flash('success', 'Odpověď úspěšně odeslána');
-                                        }else{
-                                                req.flash('error', 'Nezadal jste odpověď')
-                                        }
-
-                                }else{
-                                        req.flash('error', 'Už jste odpovídali');
-                                }
-
-                        }else if(req.params.id == "q3"){
-                                        
-                                const condition = await client.query("SELECT q3 FROM userQuestions WHERE email = $1", [req.body.email]);
-
-                                const conditions = JSON.stringify(condition.rows).includes("null");
-                                
-                                if(conditions){
-
-                                        if(req.body.odpoved != ""){
-
-                                                await client.query("UPDATE userquestions SET q3 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
-                                                
-                                                req.flash('success', 'Odpověď úspěšně odeslána');
-                                        }else{
-                                                req.flash('error', 'Nezadal jste odpověď')
-                                        }
-
-                                }else{
-                                        req.flash('error', 'Už jste odpovídali');
-                                }
-                                
-                        }else if(req.params.id == "q4"){
-                                
-                                const condition = await client.query("SELECT q4 FROM userQuestions WHERE email = $1", [req.body.email]);
-
-                                const conditions = JSON.stringify(condition.rows).includes("null");
-                                
-                                if(conditions){
-
-                                        if(req.body.odpoved != ""){
-
-                                                await client.query("UPDATE userquestions SET q4 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
-                                                
-                                                req.flash('success', 'Odpověď úspěšně odeslána');
-                                        }else{
-                                                req.flash('error', 'Nezadal jste odpověď')
-                                        }
-
-                                }else{
-                                        req.flash('error', 'Už jste odpovídali');
-                                }
-                                
-                        }else if(req.params.id == "q5"){
-                                
-                                const condition = await client.query("SELECT q5 FROM userQuestions WHERE email = $1", [req.body.email]);
-
-                                const conditions = JSON.stringify(condition.rows).includes("null");
-                                
-                                if(conditions){
-
-                                        if(req.body.odpoved != ""){
-
-                                                await client.query("UPDATE userquestions SET q5 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
-                                                
-                                                req.flash('success', 'Odpověď úspěšně odeslána');
-                                        }else{
-                                                req.flash('error', 'Nezadal jste odpověď')
-                                        }
-
-                                }else{
-                                        req.flash('error', 'Už jste odpovídali');
-                                }
-                        }
-                        
+                if(req.body.email == ""){
+                        req.flash('error', 'Nezadali jste email');
                 }else{
-                        req.flash('error', 'Email není zaregistrován')
-                        console.log("neplatný email")
+                        const emailQuery = await client.query("SELECT email FROM userquestions")
+                        
+                        var condition = JSON.stringify(emailQuery.rows).includes(req.body.email)
+                        if(condition){
+                                if(req.params.id == "q1"){
+                                        const condition = await client.query("SELECT q1 FROM userQuestions WHERE email = $1", [req.body.email]);
+        
+                                        const conditions = JSON.stringify(condition.rows).includes("null");
+                                        
+                                        if(conditions){
+                                                if(req.body.odpoved != ""){
+        
+                                                        await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                        
+                                                        req.flash('success', 'Odpověď úspěšně odeslána');
+                                                }else{
+                                                        req.flash('error', 'Odpověď není zadána')
+                                                }
+        
+                                        }else{
+                                                req.flash('error', 'Už jste odpovídali');
+                                        }
+        
+                                        
+                                }else if(req.params.id == "q2"){
+                                        const condition = await client.query("SELECT q2 FROM userQuestions WHERE email = $1", [req.body.email]);
+        
+                                        const conditions = JSON.stringify(condition.rows).includes("null");
+                                        
+                                        if(conditions){
+        
+                                                if(req.body.odpoved != ""){
+                                                        await client.query("UPDATE userquestions SET q2 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                        
+                                                        req.flash('success', 'Odpověď úspěšně odeslána');
+                                                }else{
+                                                        req.flash('error', 'Odpověď není zadána')
+                                                }
+        
+                                        }else{
+                                                req.flash('error', 'Už jste odpovídali');
+                                        }
+        
+                                }else if(req.params.id == "q3"){
+                                                
+                                        const condition = await client.query("SELECT q3 FROM userQuestions WHERE email = $1", [req.body.email]);
+        
+                                        const conditions = JSON.stringify(condition.rows).includes("null");
+                                        
+                                        if(conditions){
+        
+                                                if(req.body.odpoved != ""){
+        
+                                                        await client.query("UPDATE userquestions SET q3 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                        
+                                                        req.flash('success', 'Odpověď úspěšně odeslána');
+                                                }else{
+                                                        req.flash('error', 'Odpověď není zadána')
+                                                }
+        
+                                        }else{
+                                                req.flash('error', 'Už jste odpovídali');
+                                        }
+                                        
+                                }else if(req.params.id == "q4"){
+                                        
+                                        const condition = await client.query("SELECT q4 FROM userQuestions WHERE email = $1", [req.body.email]);
+        
+                                        const conditions = JSON.stringify(condition.rows).includes("null");
+                                        
+                                        if(conditions){
+        
+                                                if(req.body.odpoved != ""){
+        
+                                                        await client.query("UPDATE userquestions SET q4 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                        
+                                                        req.flash('success', 'Odpověď úspěšně odeslána');
+                                                }else{
+                                                        req.flash('error', 'Odpověď není zadána')
+                                                }
+        
+                                        }else{
+                                                req.flash('error', 'Už jste odpovídali');
+                                        }
+                                        
+                                }else if(req.params.id == "q5"){
+                                        
+                                        const condition = await client.query("SELECT q5 FROM userQuestions WHERE email = $1", [req.body.email]);
+        
+                                        const conditions = JSON.stringify(condition.rows).includes("null");
+                                        
+                                        if(conditions){
+        
+                                                if(req.body.odpoved != ""){
+        
+                                                        await client.query("UPDATE userquestions SET q5 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                        
+                                                        req.flash('success', 'Odpověď úspěšně odeslána');
+                                                }else{
+                                                        req.flash('error', 'Odpověď není zadána')
+                                                }
+        
+                                        }else{
+                                                req.flash('error', 'Už jste odpovídali');
+                                        }
+                                }
+                                
+                        }else{
+                                req.flash('error', 'Email není zaregistrován')
+                                console.log("neplatný email")
+                        }
                 }
                 
         }catch(err){
