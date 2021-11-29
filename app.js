@@ -157,7 +157,7 @@ app.get("/database", async (req,res) => {
 });
 
 app.get("/loaderio-3d68f88cdb5395a4e75a38561e0a9316", (req, res) =>{
-        res.sendFile(__dirname + 'scr/views/loaderio-3d68f88cdb5395a4e75a38561e0a9316.html');
+        res.sendFile(__dirname + '/scr/views/loaderio-3d68f88cdb5395a4e75a38561e0a9316.html');
 });
 
 app.get("/questions/:id", (req, res) =>{
