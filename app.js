@@ -165,6 +165,7 @@ app.get("/email", (req, res) =>{
 app.post("/email", async(req, res) =>{
         const client = await pool.connect()
         try{
+                query = []
                 const questionsData = await client.query("SELECT * FROM userquestions WHERE email = $1", [req.body.email]);
 
                 query.push(JSON.stringify(questionsData.rows));
