@@ -92,15 +92,15 @@ article h4{
 }
 
 article h5{
-    font-size: 15px;
+    font-size: 20px;
     font-weight: bold;
     color: black;
     margin-left: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 article p{
-    margin-left: 10px;
+    margin-left: 15px;
     margin-bottom: 5px;
 }
 
