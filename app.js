@@ -174,6 +174,7 @@ app.post("/email", async(req, res) =>{
         }finally{
                 client.release();
                 console.log("Connection end");
+                res.redirect("/email");
         }
 });
 
