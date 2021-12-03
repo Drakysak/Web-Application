@@ -91,8 +91,16 @@ article h4{
     margin-bottom: 10px;
 }
 
-article p{
+article h5{
+    font-weight: bold;
+    color: black;
     margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+article p{
+    margin-left: 10px;
+    margin-bottom: 5px;
 }
 
 p strong{
