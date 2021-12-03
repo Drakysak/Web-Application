@@ -167,9 +167,7 @@ app.post("/email", async(req, res) =>{
         try{
                 const questionsData = await client.query("SELECT * FROM userquestions WHERE email = $1", [req.body.email]);
 
-                console.log(questionsData.rows);
-                query.push(questionsData.rows)
-                console.log(query);
+                query.push(JSON.stringify(questionsData.rows));
 
         }catch(err){
                 console.log(err);
