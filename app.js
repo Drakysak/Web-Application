@@ -156,7 +156,7 @@ app.get("/database", async (req,res) => {
         }
 });
 
-let query;
+let query = null;
 
 app.get("/email", (req, res) =>{
         res.render("vyhodnoceni", {data : query});
