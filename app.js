@@ -156,6 +156,27 @@ app.get("/database", async (req,res) => {
         }
 });
 
+let query;
+
+app.get("/email", (req, res) =>{
+        res.render("vyhodnoceni", {data : query});
+});
+
+app.post("/email", async(req, res) =>{
+        const client = await pool.connect()
+        try{
+                const questionsData = await client.query("SELECT * FROM userquestions WHERE email = $1", [req.body.email]);
+
+                query = questionsData.rows
+
+        }catch(err){
+                console.log(err);
+        }finally{
+                client.release();
+                console.log("Connection end");
+        }
+});
+
 app.get("/loaderio-3d68f88cdb5395a4e75a38561e0a9316", (req, res) =>{
         res.sendFile(__dirname + '/src/views/loaderio-3d68f88cdb5395a4e75a38561e0a9316.html');
 });
