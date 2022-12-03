@@ -8,7 +8,7 @@ const flash = require("connect-flash");
 
 
 const pool = new Pool({
-        connectionString: process.env.DATABASE_URL,
+        connectionString: "postgres://web_project_db_user:O60nZM26kZYVH5Iq46JYhRPGow3kqxHu@dpg-ce5il65a4991uesi79dg-a/web_project_db",
         ssl: {
                 rejectUnauthorized: false
         }
