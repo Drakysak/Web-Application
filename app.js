@@ -210,9 +210,9 @@ app.post("/questions/:id", async(req, res) =>{
                                         const conditions = JSON.stringify(condition.rows).includes("null");
                                         
                                         if(conditions){
-                                                if(req.body.odpoved != ""){
+                                                if(req.body.answer != ""){
         
-                                                        await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                        await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.answer]);
                                                         
                                                         req.flash('success', 'Odpověď úspěšně odeslána');
                                                 }else{
