@@ -212,7 +212,7 @@ app.post("/questions/:id", async(req, res) =>{
                                         if(conditions){
                                                 if(req.body.answer != ""){
         
-                                                        await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.odpoved, req.body.answer]);
+                                                        await client.query("UPDATE userquestions SET q1 =$1 WHERE email=$2", [req.body.answer, req.body.email]);
                                                         
                                                         req.flash('success', 'Odpověď úspěšně odeslána');
                                                 }else{
@@ -232,7 +232,7 @@ app.post("/questions/:id", async(req, res) =>{
                                         if(conditions){
         
                                                 if(req.body.odpoved != ""){
-                                                        await client.query("UPDATE userquestions SET q2 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                        await client.query("UPDATE userquestions SET q2 =$1 WHERE email=$2", [req.body.answer, req.body.email]);
                                                         
                                                         req.flash('success', 'Odpověď úspěšně odeslána');
                                                 }else{
@@ -253,7 +253,7 @@ app.post("/questions/:id", async(req, res) =>{
         
                                                 if(req.body.odpoved != ""){
         
-                                                        await client.query("UPDATE userquestions SET q3 =$1 WHERE email=$2", [req.body.odpoved, req.body.email]);
+                                                        await client.query("UPDATE userquestions SET q3 =$1 WHERE email=$2", [req.body.answer, req.body.email]);
                                                         
                                                         req.flash('success', 'Odpověď úspěšně odeslána');
                                                 }else{
