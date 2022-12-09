@@ -21,7 +21,7 @@
             <article>
                 <h4>Otázka 1.</h4>
 
-                <h5>SOUSTRUŽNA, FRÉZÁRNA A CNC</h5>
+                <h5>FRÉZÁRNA</h5>
 
                 <p>
                     Jak se nazývá stroj určený k frézování?  
@@ -45,17 +45,18 @@
             <% } %>
 
             <form action="/questions/q1" method="post">
-                <div>
-                    <label for="email">Email kterým jste se zaregistrovali</label>
-                    <input class="email" type="text" name="email" id="email">
+                <label for="email">Email kterým jste se zaregistrovali</label>
+                <input class="email" type="text" name="email" id="email">
 
-                    <input type="radio" name="answer" id="A" value="vrtačka">
-                    <label for="A">Vrtačka</label>
-                    <input type="radio" name="answer" id="B" value="soustruh">
-                    <label for="B">Soustruh</label>
-                    <input type="radio" name="answer" id="C" value="frezka">
-                    <label for="C">Frézka</label>
-                </div>
+                <input type="radio" name="answer" id="A" value="vrtačka">
+                <label for="A">Vrtačka</label>
+
+                <input type="radio" name="answer" id="B" value="soustruh">
+                <label for="B">Soustruh</label>
+
+                <input type="radio" name="answer" id="C" value="frezka">
+                <label for="C">Frézka</label>
+                
                 <button type="submit">Odeslat</button>
             </form>
         </div>

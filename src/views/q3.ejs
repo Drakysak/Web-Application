@@ -20,9 +20,9 @@
         <div class="wrapper">
             <article>
                 <h4>Otázka 3.</h4>
-                <h5>ELEKTRODÍLNA</h5>
+                <h5>CNC</h5>
                 <p>
-                    
+                    Jaký je rozdíl mezi CNC frézkou a konvenční frézkou?
                 </p>
                 <p>
                     <strong>Odpovídat na otázku můžete jen jednou. Napište Email přesně jakým jste se registrovali, důraz na velká a malá písmena!</strong>
@@ -42,17 +42,18 @@
             <% } %>
 
             <form action="/questions/q3" method="post">
-                <div>
-                    <label for="email">Email kterým jste se zaregistrovali</label>
-                    <input class="email" type="text" name="email" id="email">
+                <label for="email">Email kterým jste se zaregistrovali</label>
+                <input class="email" type="text" name="email" id="email">
 
-                    <input type="radio" id="A" name="answer" value="kolík">
-                    <label for="A">V řízení stroje</label>
-                    <input type="radio" id="B" name="answer" value="sklicidlo">
-                    <label for="B">V barvě</label>
-                    <input type="radio" id="C" name="answer" value="soustruznicky nuz">
-                    <label for="C">Ve Velikosti</label>
-                </div>
+                <input type="radio" id="A" name="answer" value="kolík">
+                <label for="A">V řízení stroje</label>
+                    
+                <input type="radio" id="B" name="answer" value="sklicidlo">
+                <label for="B">V barvě</label>
+                    
+                <input type="radio" id="C" name="answer" value="soustruznicky nuz">
+                <label for="C">Ve velikosti</label>
+
                 <button type="submit">Odeslat</button>
             </form>
         </div>
